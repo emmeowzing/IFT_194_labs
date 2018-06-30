@@ -1,4 +1,4 @@
-\documentclass[leqno, 11pt, a4paper]{article}
+\documentclass[leqno, 11pt, letter]{article}
 
 \usepackage{lmodern}
 \usepackage[scaled]{beramono}
@@ -22,26 +22,53 @@
   keywordstyle=\color{javakeywordscolor},
   stringstyle=\color{javastringscolor},
   showstringspaces=false,  % do not show string spaces character
-  tabsize=4
+  tabsize=4,  % change tabs to spaces
+  keywordsprefix={@},  % capture method annotations and doctools
+  %showtabs=true,
+  %tab=|
 }
 
-\title{IFT 194: Lab 1}
+\title{\vspace{6ex}The Java Programming Structure\\
+  \Large IFT 194: Lab 1}
 \author{Brandon Doyle\\
-\href{mailto:bdoyle@asu.edu}{bdoyle5@asu.edu}}
+\href{mailto:bdoyle@asu.edu}{bdoyle5\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}asu.edu}\\[1em]
+Dr. Usha Jagannathan\\
+\href{mailto:Usha.Jagannathan@asu.edu}{Usha.Jagannathan\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}asu.edu}}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
 
 \begin{document}
-\maketitle
-\begin{abstract}
-  abstract
-\end{abstract}
+\begin{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+%\begin{abstract}
+%  abstract
+%\end{abstract}
 \subsection*{Subsection}
 Content
+\subsection*{Conclusion}
+I spent approximately 5 hours completing this lab. The quickest portion was
+setting up my environment as I already had the JDK installed on my Linux 
+machine and Eclipse.
+
+Challenges I faced in writing this lab report were primarily around formatting.
+Because I've chosen \LaTeX to present my code and findings, 
 \newpage
 \begin{figure}[t!]
   \centering
-    \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Driver.java}
-    \caption{Lab 1 code.}
-    \label{fig:one}
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Driver.java}
+  \caption{Driver.java}
+  \label{fig:one}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Count.java}
+  \caption{Count.java}
+  \label{fig:one}
+\end{figure}
+
 
 \end{document}
