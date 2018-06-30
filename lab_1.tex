@@ -1,0 +1,47 @@
+\documentclass[leqno, 11pt, a4paper]{article}
+
+\usepackage{lmodern}
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+
+\usepackage{xcolor}
+\definecolor{javacommentscolor}{HTML}{646464}
+\definecolor{javakeywordscolor}{HTML}{7F0055}
+\definecolor{javastringscolor}{HTML}{2A00FF}
+
+\lstset{%
+  basicstyle=\footnotesize\ttfamily, % code to be displayed as monospace
+  breaklines=true,
+  %frame=b
+  commentstyle=\color{javacommentscolor},
+  keywordstyle=\color{javakeywordscolor},
+  stringstyle=\color{javastringscolor},
+  showstringspaces=false,  % do not show string spaces character
+  tabsize=4
+}
+
+\title{IFT 194: Lab 1}
+\author{Brandon Doyle\\
+\href{mailto:bdoyle@asu.edu}{bdoyle5@asu.edu}}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+  abstract
+\end{abstract}
+\subsection*{Subsection}
+Content
+\newpage
+\begin{figure}[t!]
+  \centering
+    \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Driver.java}
+    \caption{Lab 1 code.}
+    \label{fig:one}
+\end{figure}
+
+\end{document}
