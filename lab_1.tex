@@ -1,4 +1,4 @@
-\documentclass[leqno, 11pt, letter]{article}
+\documentclass[leqno, 11pt]{article}
 
 \usepackage{lmodern}
 \usepackage[scaled]{beramono}
@@ -43,12 +43,15 @@ Dr. Usha Jagannathan\\
 \clearpage\maketitle
 \thispagestyle{empty}
 \end{titlepage}
-%\begin{abstract}
-%  abstract
-%\end{abstract}
-\subsection*{Subsection}
+
+\section*{Part A}
 Content
-\subsection*{Conclusion}
+\section*{Part B}
+\subsection*{1 Poem}
+\setcounter{subsection}{1}
+\subsection{Poem}
+Content
+\section*{Conclusion}
 I spent approximately 5 hours completing this lab. The quickest portion was
 setting up my environment as I already had the JDK installed on my Linux 
 machine and Eclipse.
@@ -67,8 +70,14 @@ Because I've chosen \LaTeX to present my code and findings,
   \centering
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Count.java}
   \caption{Count.java}
-  \label{fig:one}
+  \label{fig:two}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \lstinputlisting[language=python]{/home/brandon/projects/visual-inspection-python/example.py}
+  \caption{test\_onto.py}
+  \label{fig:three}
+\end{figure}
 
 \end{document}
