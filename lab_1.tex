@@ -5,12 +5,20 @@
 \usepackage[T1]{fontenc}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage[colorlinks=true]{hyperref}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=magenta,
+  filecolor=magenta,
+  urlcolor=magenta
+}
+
 \usepackage[margin=1in]{geometry}
 \usepackage{listings}
-\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{caption}
 
-\graphicspath{/home/brandon/Desktop/IFT_194/labs/photos}
+%\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
 
 \usepackage{xcolor}
 \definecolor{javacommentscolor}{HTML}{646464}
@@ -31,10 +39,17 @@
   %tab=|
 }
 
+\newcommand{\centeredimage}[2]{%
+  \begin{center}
+    \includegraphics[scale=#1]{#2}
+  \end{center}
+}
+
 \title{\vspace{6ex}The Java Programming Structure\\
   \Large IFT 194: Lab 1}
 \author{Brandon Doyle\\
-\href{mailto:bdoyle@asu.edu}{bdoyle5\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}asu.edu}\\[1em]
+\href{mailto:bdoyle@asu.edu}{bdoyle5\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}asu.edu}\\
+1215232174\\[1em]
 Dr. Usha Jagannathan\\
 \href{mailto:Usha.Jagannathan@asu.edu}{Usha.Jagannathan\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}asu.edu}}
 
@@ -48,14 +63,45 @@ Dr. Usha Jagannathan\\
 \end{titlepage}
 
 \section*{Part A}
-I've installed the Java Development Kit (JDK) on my laptop, which is running
-Ubuntu 16.04 LTS. We can verify this as follows.
-\includegraphics[scale=1.0]{jdk.png}
+In this activity I didn't learn many new things, but this is primarily 
+because I've already taken an introductory course in Java. I was not aware,
+however, of the history of Java's versioning (numbering) system, so I appreciated
+that background. The objective of this activity is to get students up and running
+with an environment tailored to writing Java. The activity also walks us
+through the installation process of the Java Developement Kit (JDK) and Eclipse,
+an Integrated Development Envirment (IDE) for Java.
+
+I've installed the JDK on my laptop, which is running Ubuntu 16.04 LTS. The process
+is quite simple -- all we need to do is download the appropriate JDK file and add the
+included \texttt{bin/} subdirectory (wherever it may be) to our path. The \texttt{bin/}
+subdirectory contains all the executables for running our code. It's actually quite convenient, because a lot of languages (like  Python) require compilation of some sort. Also, decompressing compressed \texttt{tar} archives can be even simpler for Linux distributions than remembering all of the appropriate flags with \texttt{dtrx}, short for ``do the right extraction.'' The package is written in Python and you can view it on \href{https://github.com/moonpyk/dtrx}{GitHub}.
+
+From here, I can verify the installation as follows in a shell.
+\centeredimage{0.6}{photos/jdk.png}
+According to Oracle's \href{http://www.oracle.com/technetwork/java/javase/downloads/index.html}{downloads} page, this is the latest version (as of July 2, 2018). Moreover, looking over my \texttt{\textasciitilde/.bashrc}, it appears at some point in the past I added the package to my path.
+\centeredimage{0.6}{photos/path.png}
+I've also re-created \texttt{Welcome.java} (cf. \autoref{fig:one}) in my eclipse-workspace, and I'm able to run it as follows from my terminal.
+\centeredimage{0.6}{photos/first_program.png}
+Installing Eclipse is almost as easy in Linux, but I had to add an appropriate \texttt{eclipse.desktop} file under \texttt{/usr/share/applications/} in order to lock the icon to my Launcher.
+
+See \autoref{image:one} for an image of my IDE.
+\begin{figure}[h!]
+  \centeredimage{0.34}{photos/ide.png}
+  \caption{Eclipse Photon.}
+  \label{image:one}
+\end{figure}
+
+I was also not aware that Java SE 10 had been released. Features of modern Java
+that I will appreciate learning more about include more of the functional
+capabilities, such as those introduced in Java SE8. I'm also aware of various
+projects, like the \href{https://github.com/functionaljava/functionaljava}{functional java} 
+library, which extends on many of these capabilities.
 \section*{Part B}
 \subsection*{1 Poem}
 \setcounter{subsection}{1}
 \subsection{Poem}
 Content
+
 \section*{Conclusion}
 I spent approximately 5 hours completing this lab. The quickest portion was
 setting up my environment as I already had the JDK installed on my Linux 
@@ -66,8 +112,8 @@ Because I've chosen \LaTeX to present my code and findings,
 \newpage
 \begin{figure}[t!]
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Driver.java}
-  \caption{Driver.java}
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Welcome.java}
+  \caption{Welcome.java}
   \label{fig:one}
 \end{figure}
 
@@ -78,11 +124,11 @@ Because I've chosen \LaTeX to present my code and findings,
   \label{fig:two}
 \end{figure}
 
-\begin{figure}
-  \centering
-  \lstinputlisting[language=python]{/home/brandon/projects/visual-inspection-python/example.py}
-  \caption{test\_onto.py}
-  \label{fig:three}
-\end{figure}
+%\begin{figure}
+%  \centering
+%  \lstinputlisting[language=python]{/home/brandon/projects/visual-inspection-python/example.py}
+%  \caption{test\_onto.py}
+%  \label{fig:three}
+%\end{figure}
 
 \end{document}
