@@ -18,6 +18,17 @@
 \usepackage{graphicx}
 \usepackage{caption}
 
+\captionsetup{%
+  width=1.0\linewidth
+}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+  \endgroup
+}
+
 %\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
 
 \usepackage{xcolor}
@@ -26,7 +37,7 @@
 \definecolor{javastringscolor}{HTML}{2A00FF}
 
 \lstset{%
-  basicstyle=\footnotesize\ttfamily, % code to be displayed as monospace
+  basicstyle=\scriptsize\ttfamily, % code to be displayed as monospace
   breaklines=true,
   %frame=b
   commentstyle=\color{javacommentscolor},
@@ -61,7 +72,7 @@ Dr. Usha Jagannathan\\
 \clearpage\maketitle
 \thispagestyle{empty}
 \end{titlepage}
-
+\blfootnote{You may view the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/lab_1.tex}{GitHub}}
 \section*{Part A}
 In this activity I didn't learn many new things, but this is primarily 
 because I've already taken an introductory course in Java. I was not aware,
@@ -82,30 +93,91 @@ According to Oracle's \href{http://www.oracle.com/technetwork/java/javase/downlo
 \centeredimage{0.6}{photos/path.png}
 I've also re-created \texttt{Welcome.java} (cf. \autoref{fig:one}) in my eclipse-workspace, and I'm able to run it as follows from my terminal.
 \centeredimage{0.6}{photos/first_program.png}
-Installing Eclipse is almost as easy in Linux, but I had to add an appropriate \texttt{eclipse.desktop} file under \texttt{/usr/share/applications/} in order to lock the icon to my Launcher.
-
-See \autoref{image:one} for an image of my IDE.
-\begin{figure}[h!]
+Installing Eclipse is almost as easy in a Debian-based Linux OS, but I had to add an appropriate \texttt{eclipse.desktop} file under \texttt{/usr/share/applications/} to lock the program's icon to my Launcher. I've done this many times in the past for packages that do not install a \texttt{*.desktop} file or aren't handled by the default Debian package manager \texttt{dpkg}. See \autoref{image:one} for an image of my IDE.
+\begin{figure}[ht!]
   \centeredimage{0.34}{photos/ide.png}
   \caption{Eclipse Photon.}
   \label{image:one}
-\end{figure}
-
+\end{figure}\\\\
 I was also not aware that Java SE 10 had been released. Features of modern Java
-that I will appreciate learning more about include more of the functional
+I hope to learn more about include more of the functional
 capabilities, such as those introduced in Java SE8. I'm also aware of various
 projects, like the \href{https://github.com/functionaljava/functionaljava}{functional java} 
-library, which extends on many of these capabilities.
+library, which extends on many of these capabilities, among others. I'm also a fan of local-variable type inference, which I believe should increase code readability.
 \section*{Part B}
 \subsection*{1 Poem}
-\setcounter{subsection}{1}
-\subsection{Poem}
-Content
+In this section we are tasked with writing a simple program in Java that prints the
+following lines of text.
+\begin{verbatim}
+Roses are red
+Violets are blue
+Sugar is sweet
+And so are you!
+\end{verbatim}
+See \autoref{fig:two} for my short code example. It's also possible to accomplish this task with a single string using the newline character `\texttt{\textbackslash n}'.
+\subsection*{2 Comments}
+\textbf{1)} In this activity we are tasked with writing comments in our programs, which either start with `\texttt{//}' for single line comments, or are enclosed in `\texttt{/*}\ldots\texttt{*/}' for multiline comments. Multiline comments aren't, unfortunately, a feature of every language (for instance, \href{https://twitter.com/gvanrossum/status/112670605505077248}{Python}), so they are a convenience for designating blocks of text the compiler (or interpreter) should ignore completely. See \autoref{fig:three} for an example of using single-line comments in code.
+
+\textbf{2)} Spaces between lines of code can sometimes increase readability. If it's one thing that's been discussed among developers since the dawn of programming languages, it's likely code readability. After all, code isn't for computers -- it's for humans, like those who wrote it. In this case, I think the spaces increase readability, however redundant they may be.
+
+\textbf{3)} Removing one of the comment's backslashes introduces a syntax error into our program, which is probably because Java's parser (see also \href{http://openjdk.java.net/groups/compiler/doc/compilation-overview/index.html}{\texttt{javac}'s compilation overview}) cannot `parse' the text into an AST. In other words, it doesn't know what to do with something like `\texttt{/ some text}' in the source file because the operation isn't defined in the language's grammar.
+
+\textbf{4)} Nesting single line comments is not an issue in Java. However, Java does \textit{not} support nested block comments. This behavior is similar to that of pure C.
+
+\textbf{5) }In such a basic program, I do not believe it's necessary to explain what the program is supposed to do. For instance, writing comments like ``print 1 to 5'' are practically useless to anyone who is familiar with Java (or, for that matter, \textit{any} language). Moreover, there is a lot someone can do to reduce the amount of comments they have to make; for instance, reducing the length of functions (better compartmentalization, break the problem into more steps).
+
+Another thing that is missing is method documentation. I think it’s a good idea to stick to formatting used by \href{http://www.oracle.com/technetwork/java/javase/tech/index-137868.html}{Javadoc}.
+\subsection*{3 Program Names}
+We are tasked with indicating which of the following would be valid class or variable identifiers in Java. See also comments in \autoref{fig:four}.
+\begin{enumerate}
+  \item \texttt{simple} -- This is a valid identifier. However, for class names, it's good practice to use uppercase letters so it's easy to recognize a type (class) from a local variable or field.
+  \item \texttt{SimpleProgram} -- Again, this is a valid identifier that uses \href{https://en.wikipedia.org/wiki/Camel_case}{CamelCase}.
+  \item \texttt{1 Simple} -- This is an invalid identifier because it contains a space \textit{and} it starts with a number.
+  \item \texttt{\_Simple\_} -- This is again a valid identifier. I typically use a leading underscore in classes to indicate that an identifier represents a private field variable.
+  \item \texttt{*Simple*} -- This is invalid because it contains special characters.
+  \item \texttt{\$123\_45} -- This is a valid identifier, but using the `\texttt{\$}' character is generally discouraged.
+  \item \texttt{Simple!} -- This is again invalid because it contains the special character `\texttt{!}'.
+\end{enumerate}
+\subsection*{4 Recognizing Syntax Errors}
+\textbf{1)} In this section we introduce typical errors into a program \texttt{Hello.java} (cf. \autoref{fig:five}). Running this program of course creates a `\texttt{Hello, World!}' message in the terminal.
+
+\textbf{2)} If we remove a single `\texttt{l}' from the class name, I receive the following error.
+\begin{verbatim}
+Error: Could not find or load main class lab_1.Hello in module ift_194_labs
+\end{verbatim}
+
+\textbf{3)} Removing any character from a string does not produce an error. Java does not, to the extent of my knowledge, work on the contents of \texttt{String} objects unless they contain an \href{https://docs.oracle.com/javase/tutorial/java/data/characters.html?PHPSESSID=c49feb01c8dab87a4350a9ec321a08f2}{escape sequence}. However, we may run into font errors while attempting to print to the terminal, or in certain situations involving `\texttt{char}' arrays and \href{http://www.oracle.com/us/technologies/java/supplementary-142654.html}{supplementary characters}. Unicode support is a tricky subject for a lot of programming languages. Because most of the data I've worked with has involved numerical computation, it hasn't been necessary for me to look into it further; however, I hope that changes throughout the duration of this course.
+
+\textbf{4)} When one removes the ending quotation of a string literal in Java, compilation produces the following error.
+\begin{verbatim}
+Exception in thread "main" java.lang.Error: Unresolved compilation problem:
+    String literal is not properly closed by a double-quote
+    at ift_194_labs/lab_1.Hello.main(Hello.java:13)
+\end{verbatim}
+In words, Java is telling us we didn't close the string literal.
+
+\textbf{5)} Removing the starting quote around our string produces the following error.
+\begin{verbatim}
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+    Hello cannot be resolved to a variable
+    Syntax error on token ",", delete this token
+    Syntax error, insert ")" to complete MethodInvocation
+    Syntax error, insert ";" to complete BlockStatements
+
+    at ift_194_labs/lab_1.Hello.main(Hello.java:13)
+\end{verbatim}
+In this case, the tokenizer first tells us we've made a syntax error as early as the comma, which again is not a valid character in an identifier. Because we're missing an opening quote, the first quote the lexer sees is prior to `\texttt{);}', which are valid string characters. However, because the program is now missing a closing `\texttt{)}' character on the method call `\texttt{System.out.println(}', the tokenizer is unable to complete the invocation. Lastly, as part of Java's C-like syntax, we're missing a semicolon at the end of the statement (since the lexer now considers it part of a string literal). Therefore, Java's parser cannot proceed to build an AST.
+\subsection*{5 Correcting Syntax Errors}
+In this section we're tasked with correcting errors in the program listed in \autoref{fig:six}. I've reproduced in \autoref{fig:seven} below my solution, albeit with a different file (and hence class) name.
+\begin{figure}[ht!]
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Solution.java}
+  \caption{Solution.java. This program is my solution to fixing the code presented in \autoref{fig:six}. Although it is not necessary, I've also removed the whitespace between the opening parenthesis on each method invocation.}
+  \label{fig:seven}
+\end{figure}
 
 \section*{Conclusion}
-I spent approximately 5 hours completing this lab. The quickest portion was
-setting up my environment as I already had the JDK installed on my Linux 
-machine and Eclipse.
+I spent approximately 8-9 hours completing this lab. The quickest portion was setting up my environment as I already had the JDK installed on my Linux machine and Eclipse. I of course also found several topics that I wasn't extremely familiar with, such as modifying my \texttt{PATH} variable. Although I've done this before, I wanted to understand exactly what commands like \texttt{export} do. 
 
 Challenges I faced in writing this lab report were primarily around formatting.
 Because I've chosen \LaTeX to present my code and findings, 
@@ -117,12 +189,39 @@ Because I've chosen \LaTeX to present my code and findings,
   \label{fig:one}
 \end{figure}
 
+\begin{figure}[t!]
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Poem.java}
+  \caption{Poem.java}
+  \label{fig:two}
+\end{figure}
+
 \begin{figure}
   \centering
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Count.java}
   \caption{Count.java}
-  \label{fig:two}
+  \label{fig:three}
 \end{figure}
+\newpage
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Simple.java}
+  \caption{Simple.java}
+  \label{fig:four}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Hello.java}
+  \caption{Hello.java}
+  \label{fig:five}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Problems.java}
+  \caption{Problems.java. This program has many errors.}
+  \label{fig:six}
+\end{figure}
+
 
 %\begin{figure}
 %  \centering
