@@ -72,7 +72,7 @@ Dr. Usha Jagannathan\\
 \clearpage\maketitle
 \thispagestyle{empty}
 \end{titlepage}
-\blfootnote{You may view the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/lab_1.tex}{GitHub}}
+\blfootnote{You may view the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/lab_1.tex}{GitHub}.}
 \section*{Part A}
 In this activity I didn't learn many new things, but this is primarily 
 because I've already taken an introductory course in Java. I was not aware,
@@ -99,11 +99,7 @@ Installing Eclipse is almost as easy in a Debian-based Linux OS, but I had to ad
   \caption{Eclipse Photon.}
   \label{image:one}
 \end{figure}\\\\
-I was also not aware that Java SE 10 had been released. Features of modern Java
-I hope to learn more about include more of the functional
-capabilities, such as those introduced in Java SE8. I'm also aware of various
-projects, like the \href{https://github.com/functionaljava/functionaljava}{functional java} 
-library, which extends on many of these capabilities, among others. I'm also a fan of local-variable type inference, which I believe should increase code readability.
+I was also not aware that Java SE 10 had been released. Features of modern Java I hope to learn more about include its functional capabilities, such as those introduced in Java SE8. I'm also aware of various projects, such as \href{https://github.com/functionaljava/functionaljava}{functional java} library, which extend these capabilities. I'm also a fan of local-variable type inference, which I think increase code readability (e.g. see \autoref{fig:four}).
 \section*{Part B}
 \subsection*{1 Poem}
 In this section we are tasked with writing a simple program in Java that prints the
@@ -114,19 +110,19 @@ Violets are blue
 Sugar is sweet
 And so are you!
 \end{verbatim}
-See \autoref{fig:two} for my short code example. It's also possible to accomplish this task with a single string using the newline character `\texttt{\textbackslash n}'.
+See \autoref{fig:two} for my short code example. It's also possible to accomplish this task with a single string and method invocation using the newline character `\texttt{\textbackslash n}'.
 \subsection*{2 Comments}
-\textbf{1)} In this activity we are tasked with writing comments in our programs, which either start with `\texttt{//}' for single line comments, or are enclosed in `\texttt{/*}\ldots\texttt{*/}' for multiline comments. Multiline comments aren't, unfortunately, a feature of every language (for instance, \href{https://twitter.com/gvanrossum/status/112670605505077248}{Python}), so they are a convenience for designating blocks of text the compiler (or interpreter) should ignore completely. See \autoref{fig:three} for an example of using single-line comments in code.
+\textbf{1)} In this activity we are tasked with writing comments in our programs, which either start with `\texttt{//}' for single line comments, or enclose text in `\texttt{/*}\ldots\texttt{*/}' for multiline comments. Multiline comments aren't, unfortunately, a feature of every language (for instance, \href{https://twitter.com/gvanrossum/status/112670605505077248}{Python}, which isn't well-known), so they are a convenience for designating blocks of text the lexer should ignore completely. See \autoref{fig:three} for an example of using single-line comments in code.
 
 \textbf{2)} Spaces between lines of code can sometimes increase readability. If it's one thing that's been discussed among developers since the dawn of programming languages, it's likely code readability. After all, code isn't for computers -- it's for humans, like those who wrote it. In this case, I think the spaces increase readability, however redundant they may be.
 
-\textbf{3)} Removing one of the comment's backslashes introduces a syntax error into our program, which is probably because Java's parser (see also \href{http://openjdk.java.net/groups/compiler/doc/compilation-overview/index.html}{\texttt{javac}'s compilation overview}) cannot `parse' the text into an AST. In other words, it doesn't know what to do with something like `\texttt{/ some text}' in the source file because the operation isn't defined in the language's grammar.
+\textbf{3)} Removing one of the comment's backslashes introduces a syntax error into our program, which is probably because Java's lexer (see e.g. \href{http://openjdk.java.net/groups/compiler/doc/compilation-overview/index.html}{\texttt{javac}'s compilation overview}) cannot tokenize the string for the parser to create an AST. In other words, it doesn't know what to do with something like `\texttt{/ some text}' in the source file because the operation isn't defined in the language's grammar.
 
 \textbf{4)} Nesting single line comments is not an issue in Java. However, Java does \textit{not} support nested block comments. This behavior is similar to that of pure C.
 
 \textbf{5) }In such a basic program, I do not believe it's necessary to explain what the program is supposed to do. For instance, writing comments like ``print 1 to 5'' are practically useless to anyone who is familiar with Java (or, for that matter, \textit{any} language). Moreover, there is a lot someone can do to reduce the amount of comments they have to make; for instance, reducing the length of functions (better compartmentalization, break the problem into more steps).
 
-Another thing that is missing is method documentation. I think it’s a good idea to stick to formatting used by \href{http://www.oracle.com/technetwork/java/javase/tech/index-137868.html}{Javadoc}.
+Another thing that is missing is method documentation. I think it's a good idea to stick to formatting used by \href{http://www.oracle.com/technetwork/java/javase/tech/index-137868.html}{Javadoc}.
 \subsection*{3 Program Names}
 We are tasked with indicating which of the following would be valid class or variable identifiers in Java. See also comments in \autoref{fig:four}.
 \begin{enumerate}
@@ -146,7 +142,7 @@ We are tasked with indicating which of the following would be valid class or var
 Error: Could not find or load main class lab_1.Hello in module ift_194_labs
 \end{verbatim}
 
-\textbf{3)} Removing any character from a string does not produce an error. Java does not, to the extent of my knowledge, work on the contents of \texttt{String} objects unless they contain an \href{https://docs.oracle.com/javase/tutorial/java/data/characters.html?PHPSESSID=c49feb01c8dab87a4350a9ec321a08f2}{escape sequence}. However, we may run into font errors while attempting to print to the terminal, or in certain situations involving `\texttt{char}' arrays and \href{http://www.oracle.com/us/technologies/java/supplementary-142654.html}{supplementary characters}. Unicode support is a tricky subject for a lot of programming languages. Because most of the data I've worked with has involved numerical computation, it hasn't been necessary for me to look into it further; however, I hope that changes throughout the duration of this course.
+\textbf{3)} Removing any character from a string does not produce an error. Java does not, to the extent of my knowledge, work on the contents of \texttt{String} objects unless they contain an \href{https://docs.oracle.com/javase/tutorial/java/data/characters.html?PHPSESSID=c49feb01c8dab87a4350a9ec321a08f2}{escape sequence}. However, we may run into font errors while attempting to print to the terminal, or in certain situations involving `\texttt{char}' arrays and \href{http://www.oracle.com/us/technologies/java/supplementary-142654.html}{supplementary characters}. Unicode support is a tricky subject for a lot of programming languages. Because most of the data I've worked with has involved numerical data, it hasn't been necessary for me to look into it further; however, I hope that changes throughout the duration of this course.
 
 \textbf{4)} When one removes the ending quotation of a string literal in Java, compilation produces the following error.
 \begin{verbatim}
@@ -179,9 +175,10 @@ In this section we're tasked with correcting errors in the program listed in \au
 \section*{Conclusion}
 I spent approximately 8-9 hours completing this lab. The quickest portion was setting up my environment as I already had the JDK installed on my Linux machine and Eclipse. I of course also found several topics that I wasn't extremely familiar with, such as modifying my \texttt{PATH} variable. Although I've done this before, I wanted to understand exactly what commands like \texttt{export} do. 
 
-Challenges I faced in writing this lab report were primarily around formatting.
-Because I've chosen \LaTeX to present my code and findings, 
+Challenges I faced in writing this lab report were primarily around formatting. Because I've chosen \LaTeX to present my code and findings, I had a number of issues to figure out with this language.
+
 \newpage
+
 \begin{figure}[t!]
   \centering
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Welcome.java}
@@ -202,32 +199,28 @@ Because I've chosen \LaTeX to present my code and findings,
   \caption{Count.java}
   \label{fig:three}
 \end{figure}
+
 \newpage
+
 \begin{figure}
   \centering
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Simple.java}
   \caption{Simple.java}
   \label{fig:four}
 \end{figure}
+
 \begin{figure}
   \centering
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Hello.java}
   \caption{Hello.java}
   \label{fig:five}
 \end{figure}
+
 \begin{figure}
   \centering
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_1/Problems.java}
   \caption{Problems.java. This program has many errors.}
   \label{fig:six}
 \end{figure}
-
-
-%\begin{figure}
-%  \centering
-%  \lstinputlisting[language=python]{/home/brandon/projects/visual-inspection-python/example.py}
-%  \caption{test\_onto.py}
-%  \label{fig:three}
-%\end{figure}
 
 \end{document}
