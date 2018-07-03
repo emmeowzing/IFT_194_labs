@@ -6,4 +6,6 @@
 
 FILE="$1"
 
-pdflatex -output-directory=pdfs "$FILE"
+for i in {1..2}; do
+    pdflatex -output-directory=pdfs "$FILE"
+done
