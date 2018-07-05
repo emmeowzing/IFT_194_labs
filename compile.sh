@@ -5,7 +5,17 @@
 #
 
 FILE="$1"
+N=2
+SUB="pdfs"
 
-for _ in {1..2}; do
+# Compile N times (for \autoref, etc.)
+for _ in $(seq $N); do
     pdflatex -output-directory=pdfs "$FILE"
+done
+
+# Clean up
+CLEANUP="$(find "$SUB" -type f | awk '/.*[^(pdf)]$/ { print $0 }')"
+
+for f in $CLEANUP; do
+    rm "$f"
 done
