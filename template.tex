@@ -1,0 +1,81 @@
+\documentclass[leqno, 11pt]{article}
+
+\usepackage{lmodern}
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=magenta,
+  filecolor=magenta,
+  urlcolor=magenta
+}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{caption}
+
+\captionsetup{%
+  width=1.0\linewidth,
+  justification=centering
+}
+
+% Better `@' symbol
+\newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+  \endgroup
+}
+
+%\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
+
+\usepackage{xcolor}
+\definecolor{javacommentscolor}{HTML}{646464}
+\definecolor{javakeywordscolor}{HTML}{7F0055}
+\definecolor{javastringscolor}{HTML}{2A00FF}
+
+\lstset{%
+  basicstyle=\scriptsize\ttfamily, % code to be displayed as monospace
+  breaklines=true,
+  %frame=b
+  commentstyle=\color{javacommentscolor},
+  keywordstyle=\color{javakeywordscolor},
+  stringstyle=\color{javastringscolor},
+  showstringspaces=false,  % do not show string spaces character
+  tabsize=4,  % change tabs to spaces
+  keywordsprefix={@},  % capture method annotations and doctools
+  %showtabs=true,
+  %tab=|
+}
+
+\newcommand{\centeredimage}[2]{%
+  \begin{center}
+    \includegraphics[scale=#1]{#2}
+  \end{center}
+}
+
+\title{\vspace{6ex}The Java Programming Structure\\
+  \Large IFT 194: HW 1}
+\author{Brandon Doyle\\
+\href{mailto:bdoyle@asu.edu}{bdoyle5\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}asu.edu}\\
+1215232174\\[1em]
+Dr. Usha Jagannathan\\
+\href{mailto:Usha.Jagannathan@asu.edu}{Usha.Jagannathan\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}asu.edu}}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+\blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname}{GitHub}.}
+Content
+\end{document}
