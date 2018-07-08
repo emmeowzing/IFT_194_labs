@@ -91,13 +91,26 @@ Dr. Usha Jagannathan\\
   \item We are tasked with writing an \texttt{if--then} statement to state whether a student has made the Dean's list. Please see \autoref{fig:one} for my solution.
   \item We are tasked with completing/fixing an example program that computes the raise an employee will receive based on their performance value. Please see \autoref{fig:two} for my solution.
 \end{enumerate}
+\section*{Textbook Section 5.4}
+\begin{enumerate}
+  \item Suppose we have a loop as follows.
+        \begin{figure}[h!]
+          \centering
+          \lstinputlisting[language=java,xleftmargin=0.25\textwidth]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/SimpleLoop.java}
+          \caption{SimpleLoop.java.}
+          \label{fig:three}
+        \end{figure}\\
+        This program outputs the sequence \texttt{1..10} when it's executed. Reversing the order of the statements \texttt{count++} and \texttt{System.out.println(count + `` '')} will thus print the sequence \texttt{2..11}. This is the case because we are then incrementing each value in \texttt{1..10} \textit{prior} to printing. 
+        
+        As a quick comparison, because I think it's awesome how some languages (or paradigms) are better at expressing certain concepts than others, I've written the same program in Haskell with monads in \autoref{fig:four}. (I think most of the complexity is introduced by immutability.)
+\end{enumerate}
 \section*{Conclusion}
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \newpage
 \begin{figure}
   \centering
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/DeansList.java}
-  \caption{DeansList.java. I decided to turn this program into a super simple command line utility (to test the usage of \texttt{args} in the \texttt{main} function).}
+  \caption{DeansList.java. I decided to turn this program into a super simple command line utility to test the usage of \texttt{args} in the \texttt{main} function.}
   \label{fig:one}
 \end{figure}
 \begin{figure}
@@ -105,5 +118,17 @@ Dr. Usha Jagannathan\\
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Salary.java}
   \caption{Salary.java. See also the documentation on \href{https://docs.oracle.com/javase/10/docs/api/java/lang/AutoCloseable.html}{AutoCloseable}, which provides a nice interface for closing files like Python's \href{https://docs.python.org/3/reference/compound_stmts.html\#with}{context managers}.}
   \label{fig:two}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=haskell]{/home/brandon/Desktop/IFT_194/labs/code/increment.hs}
+  \begin{verbatim}
+$ ghc --make increment.hs
+$ ./increment
+1 2 3 4 5 6 7 8 9 10
+2 3 4 5 6 7 8 9 10 11
+  \end{verbatim}
+  \caption{increment.hs.}
+  \label{fig:four}
 \end{figure}
 \end{document}
