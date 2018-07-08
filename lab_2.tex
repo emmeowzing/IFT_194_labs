@@ -60,8 +60,8 @@
   \end{center}
 }
 
-\title{\vspace{6ex}The Java Programming Structure\\
-  \Large IFT 194: HW 1}
+\title{\vspace{6ex}Fundamental Programming Structures in Java\\
+  \Large IFT 194: Lab 2}
 \author{Brandon Doyle\\
 \href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
 1215232174\\[1em]
@@ -76,6 +76,20 @@ Dr. Usha Jagannathan\\
 \clearpage\maketitle
 \thispagestyle{empty}
 \end{titlepage}
+\section*{Pre-Lab Exercises}
+\subsection*{A. Textbook Sections 5.1--5.3}
+\begin{enumerate}
+  \item We are tasked with rewriting various conditions in valid Java syntax. 
+        \begin{enumerate}
+          \item The condition \texttt{x > y > z} may be written in Java as \texttt{x > y \&\& y > z}, i.e. we need to join the two comparisons by the $\wedge$--logical operator. This is a result of the type of objects the relational operators act upon; because \texttt{x > y} returns a \texttt{boolean} type, we receive a compile-time error (invalid types).
+    
+                Interestingly enough, this \textit{is} valid Python syntax due its recursive \href{https://github.com/python/cpython/blob/master/Grammar/Grammar#L93}{comp\_op} Grammar definition, so we may (hypothetically) write an inifinite sequence \texttt{expr comp\_op ... expr comp\_op expr}. $\wedge$--logical operators are automatically inserted.
+              \item The statement ``x and y are both less than 0'' may quite simply be expressed as \texttt{x < 0 \&\& y < 0}.
+              \item The statement ``neither x nor y are less than 0'' may be expressed as \texttt{x >= 0 \&\& y >= 0}, or the negation of the previous predicate, i.e. \texttt{!(x < 0 \&\& y < 0)}. I think the former is more readable, however.
+              \item The statement ``x equals y but not z'' may be written as \texttt{x == y \&\& x != z}.
+        \end{enumerate}
+  \item 
+\end{enumerate}
+\section*{Conclusion}
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname}{GitHub}.}
-Content
 \end{document}
