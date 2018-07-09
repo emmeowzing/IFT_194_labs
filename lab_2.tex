@@ -23,6 +23,8 @@
   justification=centering
 }
 
+\usepackage{verbatimbox}
+
 % Better `@' symbol
 \newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
 
@@ -76,6 +78,7 @@ Dr. Usha Jagannathan\\
 \clearpage\maketitle
 \thispagestyle{empty}
 \end{titlepage}
+\blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \section*{Pre-Lab Exercises}
 \subsection*{A. Textbook Sections 5.1--5.3}
 \begin{enumerate}
@@ -103,9 +106,73 @@ Dr. Usha Jagannathan\\
         This program outputs the sequence \texttt{1..10} when it's executed. Reversing the order of the statements \texttt{count++} and \texttt{System.out.println(count + `` '')} will thus print the sequence \texttt{2..11}. This is the case because we are then incrementing each value in \texttt{1..10} \textit{prior} to printing. 
         
         As a quick comparison, because I think it's awesome how some languages (or paradigms) are better at expressing certain concepts than others, I've written the same program in Haskell with monads in \autoref{fig:four}. (I think most of the complexity is introduced by immutability.)
+  \item Next we will consider the following program/loop.
+        \begin{figure}[h!]
+          \centering
+          \lstinputlisting[language=java,xleftmargin=0.25\textwidth]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/TraceLoop.java}
+          \caption{TraceLoop.java.}
+          \label{fig:five}
+        \end{figure}\\
+        When run, the output of this program is the statement ``The sum of your integers is 20.'' Below is a table containing the values of \texttt{count}, \texttt{sum}, and \texttt{nextVal} as this program is executing.
+        \begin{center}
+          \begin{tabular}{|c|c|c|}
+            \hline
+            \texttt{count} & \texttt{sum} & \texttt{nextVal}\\
+            \hline
+            1 & 0  & 2  \\
+            \hline
+            2 & 2  & 4  \\
+            \hline
+            3 & 6  & 6  \\
+            \hline
+            4 & 12 & 8  \\
+            \hline
+            5 & 20 & 10 \\
+            \hline
+          \end{tabular}
+        \end{center}
+        If we wished instead to add the first \textit{count} nonzero integers, we could modify the \texttt{count} variable to start at some positive integer, such as \texttt{5}, and the \texttt{while}-loop's predicate to instead state \verb|count-- > 0| (while removing the following  \texttt{count++}), which outputs the following.
+        \begin{center}
+          \begin{tabular}{|c|c|c|}
+            \hline
+            \texttt{count} & \texttt{sum} & \texttt{nextVal}\\
+            \hline
+             4 & 0  & 2  \\
+            \hline
+             3 & 2  & 4  \\
+            \hline
+             2 & 6  & 6  \\
+            \hline
+             1 & 12 & 8  \\
+            \hline
+             0 & 20 & 10 \\
+            \hline
+            -1 & 30 & 12 \\
+            \hline
+          \end{tabular}
+        \end{center}
+  \item We're tasked next with writing a loop that will print the statement ``I love computer science!!'' 100 times. See \autoref{fig:six} for my solution. Also, this type of loop is count-controlled, and I would much rather have used a \texttt{for}-loop.
+  \item In this question we're asked to write a program that accepts integers from the user and adds them all up. See \autoref{fig:seven} for my solution.
+
+        Also note that I've used a regular expression to match user input -- this loop is \textit{not} ``count-controlled,'' it will exit only if the user decides to terminate the loop. The following is an example input.
+        \begin{verbbox}
+Enter the next integer: 1
+Intermediate total: 1
+Keep going? [y|n]: y
+Enter the next integer: 13
+Intermediate total: 14
+Keep going? [y|n]: 7
+Total: 14
+Input integers: 2
+*** Exiting
+        \end{verbbox}
+        \begin{figure}[h!]
+          \centering
+          \theverbbox
+        \end{figure}
+      \item We are asked to write a loop that counts backward from 10 to 1. The code provided has two issues, namely that the \texttt{while}-loop's predicate should be \texttt{count > 0} (we'd like to stop at 1, not 0), and the variable \texttt{count} should be decremented, not incremented, as \verb|count--|. See \autoref{fig:eight} for my solution.
 \end{enumerate}
 \section*{Conclusion}
-\blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \newpage
 \begin{figure}
   \centering
@@ -130,5 +197,23 @@ $ ./increment
   \end{verbatim}
   \caption{increment.hs.}
   \label{fig:four}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/CSLoop.java}
+  \caption{CSLoop.java.}
+  \label{fig:six}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Loop.java}
+  \caption{Loop.java.}
+  \label{fig:seven}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Decrement.java}
+  \caption{Decrement.java.}
+  \label{fig:eight}
 \end{figure}
 \end{document}
