@@ -16,6 +16,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{caption}
 
 \captionsetup{%
@@ -25,6 +26,7 @@
 
 \usepackage{verbatimbox}
 \usepackage{siunitx}
+\usepackage{colortbl}
 
 % Better `@' symbol
 \newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
@@ -38,7 +40,8 @@
 
 %\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
 
-\usepackage{xcolor}
+\definecolor{tableheaderrow}{HTML}{CED3DB}
+
 \definecolor{javacommentscolor}{HTML}{646464}
 \definecolor{javakeywordscolor}{HTML}{7F0055}
 \definecolor{javastringscolor}{HTML}{2A00FF}
@@ -118,6 +121,7 @@ Dr. Usha Jagannathan\\
         \begin{center}
           \begin{tabular}{|c|c|c|}
             \hline
+            \rowcolor{tableheaderrow}
             \texttt{count} & \texttt{sum} & \texttt{nextVal}\\
             \hline
             1 & 0  & 2  \\
@@ -136,6 +140,7 @@ Dr. Usha Jagannathan\\
         \begin{center}
           \begin{tabular}{|c|c|c|}
             \hline
+            \rowcolor{tableheaderrow}
             \texttt{count} & \texttt{sum} & \texttt{nextVal}\\
             \hline
              4 & 0  & 2  \\
@@ -193,7 +198,7 @@ In Java the (\texttt{+}) operator has the ability to work on numbers and strings
   \item Please see \autoref{fig:ten} for my solution to this problem (it's quite simple).
 \end{enumerate}
 \section*{Painting a Room}
-In this section we're presented with the problem of prompting a user for the dimensions of a room, the walls of which we would like to paint. However, each gallon of paint will only cover 350 \si{ft^{2}}. See \autoref{fig:eleven} for my initial solution. An example session is as follows.
+In this section we're presented with the problem of prompting a user for the dimensions of a room, the walls of which we would like to paint. However, each gallon of paint will only cover 350 \si{ft^{2}}, and we would like to know the amount of paint we need to buy. See \autoref{fig:eleven} for my initial solution. An example session is as follows.
 \begin{verbbox}
 Please enter an integer for the length: 5
 Please enter an integer for the width: 5
@@ -215,18 +220,47 @@ Hence, working out the example above, we have
 \end{align}
 which is exactly my program's output.
 
-Now, suppose we wanted to subtract windows and doors? We can add this functionality by adding two more field variables, local variables, and calls to \texttt{getAttr}, and modifying the equation to
+Now, suppose we wanted to subtract windows and doors? Assuming they have areas of 15 \si{ft^{2}} and 20 \si{ft^{2}}, respectively, we can add this functionality by adding two more field variables, local variables, and calls to \texttt{getAttr}, in addition to modifying the equation to
 \begin{align}
   2\times H\times L + 2\times H\times W \color{red}{- \Omega\times 15 - D\times 20}&=2\times H\times\left(L + W\right)\color{red}{- \Omega\times 15 - D\times 20}.\notag
 \end{align}
-The code changes are as follows (the entire file will be included in my submission).
-\begin{figure}[h!]
-\begin{lstlisting}[language=java,xleftmargin=0.25\textwidth]
-final public static int WINDOW = 15;
-final public static int DOOR = 20;
-\end{lstlisting}
+To save space in this document I've submitted a gunzipped tarball with all of my code. Another command that may be of use if you're using Linux is to run \texttt{diff -y -W 150 code/Paint* | less}, which  will display relevant changes side-by-side (or simply cat the included differences.txt file).
+\section*{Counting Characters}
+In this section we're concerned with writing a program that will accept a string via a \texttt{Scanner} object from the user and count certain characters in the string. See \autoref{fig:twelve} for my solution. See \autoref{fig:thirteen} an example session so you may see how it works.
+\begin{verbbox}[\mbox{}]
+Character Counter
+=================
+
+Please enter a string of text: hello, world! I enjoy writing JAva
+
+Number of blank spaces: 5
+Number of [aA]'s: 2
+          [eE]'s: 2
+          [sS]'s: 0
+          [tT]'s: 1
+
+Add another string? [y|n]: y
+
+Please enter a string of text: of course yo
+
+Number of blank spaces: 2
+Number of [aA]'s: 0
+          [eE]'s: 1
+          [sS]'s: 1
+          [tT]'s: 0
+
+Add another string? [y|n]: quit
+
+*** Exiting
+\end{verbbox}
+\begin{figure}[t!]
+  \centering
+  \theverbbox
+  \caption{Example session with my program in \autoref{fig:twelve}.}
+  \label{fig:thirteen}
 \end{figure}
-and 
+\section*{Tracking Sales}
+In this section we're concerned with tracking the \autoref{fig:fourteen}.
 \section*{Conclusion}
 \newpage
 \begin{figure}
@@ -250,7 +284,7 @@ $ ./increment
 1 2 3 4 5 6 7 8 9 10
 2 3 4 5 6 7 8 9 10 11
   \end{verbatim}
-  \caption{increment.hs.}
+  \caption{increment.hs. See question 1 in Textbook Section 5.4's questions above.}
   \label{fig:four}
 \end{figure}
 \begin{figure}
@@ -288,5 +322,17 @@ $ ./increment
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Paint.java}
   \caption{Paint.java.}
   \label{fig:eleven}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Count.java}
+  \caption{Count.java.}
+  \label{fig:twelve}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Sales.java}
+  \caption{Sales.java.}
+  \label{fig:fourteen}
 \end{figure}
 \end{document}
