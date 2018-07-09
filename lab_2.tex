@@ -27,6 +27,14 @@
 \usepackage{verbatimbox}
 \usepackage{siunitx}
 \usepackage{colortbl}
+\usepackage[most]{tcolorbox}
+%\usepackage[framemethod=tikz]{mdframed}
+%
+%\mdfdefinestyle{mysplitpagecodestyle}{%
+%  hidealllines=true
+%}
+%
+%\newmdenv[style=mysplitpagecodestyle]{codemd}
 
 % Better `@' symbol
 \newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
@@ -161,7 +169,7 @@ Dr. Usha Jagannathan\\
   \item In this question we're asked to write a program that accepts integers from the user and adds them all up. See \autoref{fig:seven} for my solution.
 
         Also note that I've used a regular expression to match user input -- this loop is \textit{not} ``count-controlled,'' it will exit only if the user decides to terminate the loop. The following is an example input.
-        \begin{verbbox}
+        \begin{verbbox}[\mbox{}\scriptsize]
 Enter the next integer: 1
 Intermediate total: 1
 Keep going? [y|n]: y
@@ -183,23 +191,23 @@ In Java the (\texttt{+}) operator has the ability to work on numbers and strings
 
 \begin{enumerate}
   \item As an example, we're given the program in \autoref{fig:nine} to run. The output is as follows.
-  \begin{verbbox}
-  This is a long string that is the concatenation of two shorter strings.
-  The first computer was invented about55years ago.
-  8 plus 5 is 85
-  8 plus 5 is 13
-  13 equals 8 plus 5.
-  \end{verbbox}
-  \begin{figure}[h!]
-    \centering
-    \theverbbox
-  \end{figure}\\
-  In the first statement, the two strings are concatenated. In the second, the strings and number are concatenated, but space wasn't provided at the end of the former string, and at the beginning of the second, so it's a bit ``scrunched.'' In the third, both integers were cast to \texttt{String}s and concatenated to the end; however, in the forth parentheses were added, so the expression was evaluated prior to being cast and concatenated. Lastly, no parentheses were necessary to evaluate the leading expression because the argument is evaluated left-to-right.
+        \begin{verbbox}[\mbox{}\scriptsize]
+This is a long string that is the concatenation of two shorter strings.
+The first computer was invented about55years ago.
+8 plus 5 is 85
+8 plus 5 is 13
+13 equals 8 plus 5.
+        \end{verbbox}
+        \begin{figure}[h!]
+        \centering
+        \theverbbox
+        \end{figure}\\
+        In the first statement, the two strings are concatenated. In the second, the strings and number are concatenated, but space wasn't provided at the end of the former string, and at the beginning of the second, so it's a bit ``scrunched.'' In the third, both integers were cast to \texttt{String}s and concatenated to the end; however, in the forth parentheses were added, so the expression was evaluated prior to being cast and concatenated. Lastly, no parentheses were necessary to evaluate the leading expression because the argument is evaluated left-to-right.
   \item Please see \autoref{fig:ten} for my solution to this problem (it's quite simple).
 \end{enumerate}
 \section*{Painting a Room}
 In this section we're presented with the problem of prompting a user for the dimensions of a room, the walls of which we would like to paint. However, each gallon of paint will only cover 350 \si{ft^{2}}, and we would like to know the amount of paint we need to buy. See \autoref{fig:eleven} for my initial solution. An example session is as follows.
-\begin{verbbox}
+\begin{verbbox}[\mbox{}\scriptsize]
 Please enter an integer for the length: 5
 Please enter an integer for the width: 5
 Please enter an integer for the height: 10
@@ -226,8 +234,8 @@ Now, suppose we wanted to subtract windows and doors? Assuming they have areas o
 \end{align}
 To save space in this document I've submitted a gunzipped tarball with all of my code. Another command that may be of use if you're using Linux is to run \texttt{diff -y -W 150 code/Paint* | less}, which  will display relevant changes side-by-side (or simply cat the included differences.txt file).
 \section*{Counting Characters}
-In this section we're concerned with writing a program that will accept a string via a \texttt{Scanner} object from the user and count certain characters in the string. See \autoref{fig:twelve} for my solution. See \autoref{fig:thirteen} an example session so you may see how it works.
-\begin{verbbox}[\mbox{}]
+In this section we're concerned with writing a program that will accept a string via a \texttt{Scanner} object from the user and count certain characters in the string. See \autoref{fig:twelve} for my solution and \autoref{fig:thirteen} an example session so you may see how it works.
+\begin{verbbox}[\mbox{}\scriptsize]
 Character Counter
 =================
 
@@ -260,7 +268,39 @@ Add another string? [y|n]: quit
   \label{fig:thirteen}
 \end{figure}
 \section*{Tracking Sales}
-In this section we're concerned with tracking the \autoref{fig:fourteen}.
+In this section we're concerned with tracking the number of sales of salespersons and printing various statistics about the data as it's entered by a user. See figure \autoref{fig:fourteen} for my solution, and \autoref{fig:fifteen} for another example session.
+\begin{verbbox}[\mbox{}\scriptsize]
+Enter the number of salespeople: 3
+
+Enter sale for a salesperson 1: 5
+Enter sale for a salesperson 2: 3
+Enter sale for a salesperson 3: 8
+
+Salesperson sales
+-----------------
+1    5
+2    3
+3    8
+
+Total sales: 16
+Average sale: 5.333333333333333
+The max sale was by salesperson 3, which was 8
+The minimum sale was by salesperson 2, which was 3
+
+Enter a cutoff value (int): 4
+
+Salesperson 1 exceeded the cutoff with 5 sales
+Salesperson 3 exceeded the cutoff with 8 sales
+
+Total salespeople exceeding the cutoff amount: 2
+\end{verbbox}
+\begin{figure}[h!]
+  \centering
+  \vspace{0.5cm}
+  \theverbbox
+  \caption{Example session with my program in \autoref{fig:fourteen}.}
+  \label{fig:fifteen}
+\end{figure}
 \section*{Conclusion}
 \newpage
 \begin{figure}
@@ -329,10 +369,10 @@ $ ./increment
   \caption{Count.java.}
   \label{fig:twelve}
 \end{figure}
-\begin{figure}
-  \centering
+\newpage
+\begin{tcolorbox}[enhanced, breakable, frame hidden]
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Sales.java}
-  \caption{Sales.java.}
-  \label{fig:fourteen}
-\end{figure}
+%  \caption{Sales.java.}
+%  \label{fig:fourteen}
+\end{tcolorbox}
 \end{document}
