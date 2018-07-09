@@ -24,6 +24,7 @@
 }
 
 \usepackage{verbatimbox}
+\usepackage{siunitx}
 
 % Better `@' symbol
 \newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
@@ -172,6 +173,60 @@ Input integers: 2
         \end{figure}
       \item We are asked to write a loop that counts backward from 10 to 1. The code provided has two issues, namely that the \texttt{while}-loop's predicate should be \texttt{count > 0} (we'd like to stop at 1, not 0), and the variable \texttt{count} should be decremented, not incremented, as \verb|count--|. See \autoref{fig:eight} for my solution.
 \end{enumerate}
+\section*{Two Meanings of Plus}
+In Java the (\texttt{+}) operator has the ability to work on numbers and strings. This is a form of polymorphism, because the way the code works depends upon the the type of data it's acting upon.
+
+\begin{enumerate}
+  \item As an example, we're given the program in \autoref{fig:nine} to run. The output is as follows.
+  \begin{verbbox}
+  This is a long string that is the concatenation of two shorter strings.
+  The first computer was invented about55years ago.
+  8 plus 5 is 85
+  8 plus 5 is 13
+  13 equals 8 plus 5.
+  \end{verbbox}
+  \begin{figure}[h!]
+    \centering
+    \theverbbox
+  \end{figure}\\
+  In the first statement, the two strings are concatenated. In the second, the strings and number are concatenated, but space wasn't provided at the end of the former string, and at the beginning of the second, so it's a bit ``scrunched.'' In the third, both integers were cast to \texttt{String}s and concatenated to the end; however, in the forth parentheses were added, so the expression was evaluated prior to being cast and concatenated. Lastly, no parentheses were necessary to evaluate the leading expression because the argument is evaluated left-to-right.
+  \item Please see \autoref{fig:ten} for my solution to this problem (it's quite simple).
+\end{enumerate}
+\section*{Painting a Room}
+In this section we're presented with the problem of prompting a user for the dimensions of a room, the walls of which we would like to paint. However, each gallon of paint will only cover 350 \si{ft^{2}}. See \autoref{fig:eleven} for my initial solution. An example session is as follows.
+\begin{verbbox}
+Please enter an integer for the length: 5
+Please enter an integer for the width: 5
+Please enter an integer for the height: 10
+L, W, H: 5, 5, 10
+Gallans of paint required: 0.5714285714285714
+\end{verbbox}
+\begin{figure}[h!]
+  \centering
+  \theverbbox
+\end{figure}\\
+Recall that the area of the walls is given by
+\begin{align}
+  \underbrace{2\times H\times L}_{\text{adding 2 walls length-wise}} + \underbrace{2\times H\times W}_{\text{two walls width-wise}}&=2\times H\times\left(L + W\right).\notag
+\end{align}
+Hence, working out the example above, we have
+\begin{align}
+  \dfrac{2\times 10\times \left(5 + 5\right)}{350}&=\dfrac{20\times\left(10\right)}{350}\notag\\&=\dfrac{200}{350}\notag\\&=0.57...\notag
+\end{align}
+which is exactly my program's output.
+
+Now, suppose we wanted to subtract windows and doors? We can add this functionality by adding two more field variables, local variables, and calls to \texttt{getAttr}, and modifying the equation to
+\begin{align}
+  2\times H\times L + 2\times H\times W \color{red}{- \Omega\times 15 - D\times 20}&=2\times H\times\left(L + W\right)\color{red}{- \Omega\times 15 - D\times 20}.\notag
+\end{align}
+The code changes are as follows (the entire file will be included in my submission).
+\begin{figure}[h!]
+\begin{lstlisting}[language=java,xleftmargin=0.25\textwidth]
+final public static int WINDOW = 15;
+final public static int DOOR = 20;
+\end{lstlisting}
+\end{figure}
+and 
 \section*{Conclusion}
 \newpage
 \begin{figure}
@@ -215,5 +270,23 @@ $ ./increment
   \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Decrement.java}
   \caption{Decrement.java.}
   \label{fig:eight}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Add.java}
+  \caption{Add.java.}
+  \label{fig:nine}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/MyOwnAdd.java}
+  \caption{MyOwnAdd.java.}
+  \label{fig:ten}
+\end{figure}
+\begin{figure}
+  \centering
+  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Paint.java}
+  \caption{Paint.java.}
+  \label{fig:eleven}
 \end{figure}
 \end{document}
