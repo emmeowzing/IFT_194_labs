@@ -28,13 +28,17 @@
 \usepackage{siunitx}
 \usepackage{colortbl}
 \usepackage[most]{tcolorbox}
-%\usepackage[framemethod=tikz]{mdframed}
-%
-%\mdfdefinestyle{mysplitpagecodestyle}{%
-%  hidealllines=true
-%}
-%
-%\newmdenv[style=mysplitpagecodestyle]{codemd}
+
+% TODO: Set up captions with tcolorbox so the user doesn't have to explicitly
+%       pass a caption={} to each \lstlisting command.
+\newtcolorbox[blend into=figures]{codefigure}[1][]{%
+  enhanced jigsaw, 
+  float=!ht, 
+  breakable, 
+  frame hidden, 
+  colback=white,
+  #1
+}
 
 % Better `@' symbol
 \newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
@@ -68,6 +72,10 @@
   %tab=|
 }
 
+% TODO: Modify listings in the next lab so that I don't have to wrap in figure
+%       env anymore -- makes the following lines irrelevant
+\renewcommand{\lstlistingname}{Figure}
+
 \newcommand{\centeredimage}[2]{%
   \begin{center}
     \includegraphics[scale=#1]{#2}
@@ -84,6 +92,20 @@ Dr. Usha Jagannathan\\
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{0.5em}
+
+\makeatletter
+% Top-align float-only pages
+% https://tex.stackexchange.com/a/28565/96382
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+
+% Share Figure and listings counter
+\AtBeginDocument{%
+  \let\c@figure\c@lstlisting
+  \let\thefigure\thelstlisting
+  \let\ftype@lstlisting\ftype@figure
+}
+\makeatother
 
 \begin{document}
 \begin{titlepage}
@@ -111,7 +133,8 @@ Dr. Usha Jagannathan\\
   \item Suppose we have a loop as follows.
         \begin{figure}[h!]
           \centering
-          \lstinputlisting[language=java,xleftmargin=0.25\textwidth]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/SimpleLoop.java}
+          \lstinputlisting[language=java,xleftmargin=0.25\textwidth]{%
+            /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/SimpleLoop.java}
           \caption{SimpleLoop.java.}
           \label{fig:three}
         \end{figure}\\
@@ -234,7 +257,7 @@ Now, suppose we wanted to subtract windows and doors? Assuming they have areas o
 \end{align}
 To save space in this document I've submitted a gunzipped tarball with all of my code. Another command that may be of use if you're using Linux is to run \texttt{diff -y -W 150 code/Paint* | less}, which  will display relevant changes side-by-side (or simply cat the included differences.txt file).
 \section*{Counting Characters}
-In this section we're concerned with writing a program that will accept a string via a \texttt{Scanner} object from the user and count certain characters in the string. See \autoref{fig:twelve} for my solution and \autoref{fig:thirteen} an example session so you may see how it works.
+In this section we're tasked with writing a program that will accept a string via a \texttt{Scanner} object from the user and count certain characters in the string. See \autoref{fig:twelve} for my solution and \autoref{fig:thirteen} for an example session on the following page.
 \begin{verbbox}[\mbox{}\scriptsize]
 Character Counter
 =================
@@ -268,7 +291,7 @@ Add another string? [y|n]: quit
   \label{fig:thirteen}
 \end{figure}
 \section*{Tracking Sales}
-In this section we're concerned with tracking the number of sales of salespersons and printing various statistics about the data as it's entered by a user. See figure \autoref{fig:fourteen} for my solution, and \autoref{fig:fifteen} for another example session.
+In this section we're concerned with tracking the number of sales of salespersons and printing various statistics about the data as it's entered by a user. See figure \autoref{fig:fourteen} for my solution, and \autoref{fig:fifteen} for another example session on the following page.
 \begin{verbbox}[\mbox{}\scriptsize]
 Enter the number of salespeople: 3
 
@@ -298,20 +321,25 @@ Total salespeople exceeding the cutoff amount: 2
   \centering
   \vspace{0.5cm}
   \theverbbox
-  \caption{Example session with my program in \autoref{fig:fourteen}.}
+  %% Manually specified figure number because I haven't worked out the details of
+  %% the counters yet and how tcolorbox env interacts with them.
+  \caption{Example session with my program in \hyperref[fig:fourteen]{Figure 15}.}
   \label{fig:fifteen}
 \end{figure}
 \section*{Conclusion}
+In this lab I learned a lot more about Java. For instance, firstly, I learned that there are many of the same concepts in Java as there are in other OO programming languages, like Python. One such feature is context managers; as demonstrated in \autoref{fig:two}, Java too has the ability to implicitly call a \texttt{.close()} method on objects that implement the \texttt{AutoCloseable} interface. I also had a lot of fun working with more complex control structures, like loops and switch statements. I look forward to learning more about procedural and OO programming concepts.
 \newpage
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/DeansList.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/DeansList.java}
   \caption{DeansList.java. I decided to turn this program into a super simple command line utility to test the usage of \texttt{args} in the \texttt{main} function.}
   \label{fig:one}
 \end{figure}
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Salary.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Salary.java}
   \caption{Salary.java. See also the documentation on \href{https://docs.oracle.com/javase/10/docs/api/java/lang/AutoCloseable.html}{AutoCloseable}, which provides a nice interface for closing files like Python's \href{https://docs.python.org/3/reference/compound_stmts.html\#with}{context managers}.}
   \label{fig:two}
 \end{figure}
@@ -329,50 +357,58 @@ $ ./increment
 \end{figure}
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/CSLoop.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/CSLoop.java}
   \caption{CSLoop.java.}
   \label{fig:six}
 \end{figure}
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Loop.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Loop.java}
   \caption{Loop.java.}
   \label{fig:seven}
 \end{figure}
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Decrement.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Decrement.java}
   \caption{Decrement.java.}
   \label{fig:eight}
 \end{figure}
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Add.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Add.java}
   \caption{Add.java.}
   \label{fig:nine}
 \end{figure}
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/MyOwnAdd.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/MyOwnAdd.java}
   \caption{MyOwnAdd.java.}
   \label{fig:ten}
 \end{figure}
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Paint.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Paint.java}
   \caption{Paint.java.}
   \label{fig:eleven}
 \end{figure}
 \begin{figure}
   \centering
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Count.java}
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Count.java}
   \caption{Count.java.}
   \label{fig:twelve}
 \end{figure}
-\newpage
-\begin{tcolorbox}[enhanced, breakable, frame hidden]
-  \lstinputlisting[language=java]{/home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Sales.java}
-%  \caption{Sales.java.}
-%  \label{fig:fourteen}
-\end{tcolorbox}
+% Break this code across multiple pages -- see TODOs above
+\begin{codefigure}
+  \label{fig:fourteen}
+  \addtocounter{figure}{-1}
+  \lstinputlisting[language=java, caption={Sales.java}, captionpos=b]{%
+    /home/brandon/eclipse-workspace/ift_194_labs/src/lab_2/Sales.java}
+\end{codefigure}
 \end{document}
