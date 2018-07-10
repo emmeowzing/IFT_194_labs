@@ -120,8 +120,8 @@ Dr. Usha Jagannathan\\
         \begin{enumerate}
           \item The condition \texttt{x > y > z} may be written in Java as \texttt{x > y \&\& y > z}, i.e. we need to join the two comparisons by the $\wedge$--logical operator. This is a result of the type of objects the relational operators act upon; because \texttt{x > y} returns a \texttt{boolean} type, we receive a compile-time error (invalid types).
     
-                Interestingly enough, this \textit{is} valid Python syntax due its recursive \href{https://github.com/python/cpython/blob/master/Grammar/Grammar#L93}{comp\_op} Grammar definition, so we may (hypothetically) write an inifinite sequence \texttt{expr comp\_op ... expr comp\_op expr}. $\wedge$--logical operators are automatically inserted.
-              \item The statement ``x and y are both less than 0'' may quite simply be expressed as \texttt{x < 0 \&\& y < 0}.
+                Interestingly enough, this \textit{is} valid Python syntax due its recursive \href{https://github.com/python/cpython/blob/master/Grammar/Grammar#L93}{comparison} grammar definition, so we may write an inifinite sequence of \texttt{expr comp\_op ... expr comp\_op expr}. $\wedge$--logical operators are automatically inserted.
+              \item The statement ``x and y are both less than 0'' may be expressed as \texttt{x < 0 \&\& y < 0}.
               \item The statement ``neither x nor y are less than 0'' may be expressed as \texttt{x >= 0 \&\& y >= 0}, or the negation of the previous predicate, i.e. \texttt{!(x < 0 \&\& y < 0)}. I think the former is more readable, however.
               \item The statement ``x equals y but not z'' may be written as \texttt{x == y \&\& x != z}.
         \end{enumerate}
@@ -140,7 +140,7 @@ Dr. Usha Jagannathan\\
         \end{figure}\\
         This program outputs the sequence \texttt{1..10} when it's executed. Reversing the order of the statements \texttt{count++} and \texttt{System.out.println(count + `` '')} will thus print the sequence \texttt{2..11}. This is the case because we are then incrementing each value in \texttt{1..10} \textit{prior} to printing. 
         
-        As a quick comparison, because I think it's awesome how some languages (or paradigms) are better at expressing certain concepts than others, I've written the same program in Haskell with monads in \autoref{fig:four}. (I think most of the complexity is introduced by immutability.)
+        As a quick comparison, because I think it's awesome how some languages (or paradigms) are better at expressing certain concepts than others, I've written the same program in Haskell with monads in \autoref{fig:four}. (I think most of the complexity is introduced by the use of the IO monad.)
   \item Next we will consider the following program/loop.
         \begin{figure}[h!]
           \centering
@@ -225,7 +225,7 @@ The first computer was invented about55years ago.
         \centering
         \theverbbox
         \end{figure}\\
-        In the first statement, the two strings are concatenated. In the second, the strings and number are concatenated, but space wasn't provided at the end of the former string, and at the beginning of the second, so it's a bit ``scrunched.'' In the third, both integers were cast to \texttt{String}s and concatenated to the end; however, in the forth parentheses were added, so the expression was evaluated prior to being cast and concatenated. Lastly, no parentheses were necessary to evaluate the leading expression because the argument is evaluated left-to-right.
+        In the first statement, the two strings are concatenated. In the second, the strings and number are concatenated, but space wasn't provided at the end of the former string and at the beginning of the second, so it's a bit ``scrunched.'' In the third, both integers were cast to \texttt{String}s and concatenated to the end; however, in the forth parentheses were added, so the expression was evaluated prior to being cast and concatenated. Lastly, no parentheses were necessary to evaluate the leading expression because the argument is evaluated left-to-right.
   \item Please see \autoref{fig:ten} for my solution to this problem (it's quite simple).
 \end{enumerate}
 \section*{Painting a Room}
@@ -255,7 +255,7 @@ Now, suppose we wanted to subtract windows and doors? Assuming they have areas o
 \begin{align}
   2\times H\times L + 2\times H\times W \color{red}{- \Omega\times 15 - D\times 20}&=2\times H\times\left(L + W\right)\color{red}{- \Omega\times 15 - D\times 20}.\notag
 \end{align}
-To save space in this document I've submitted a gunzipped tarball with all of my code. Another command that may be of use if you're using Linux is to run \texttt{diff -y -W 150 code/Paint* | less}, which  will display relevant changes side-by-side (or simply cat the included differences.txt file).
+To save space in this document I've included in a zipped file all of my code. A command that may be of use if you're using Linux is \texttt{diff -y -W 200 code/Paint* | less}, which  will display relevant changes side-by-side (or simply cat the included differences.txt file).
 \section*{Counting Characters}
 In this section we're tasked with writing a program that will accept a string via a \texttt{Scanner} object from the user and count certain characters in the string. See \autoref{fig:twelve} for my solution and \autoref{fig:thirteen} for an example session on the following page.
 \begin{verbbox}[\mbox{}\scriptsize]
