@@ -1,0 +1,244 @@
+\documentclass[leqno, 11pt]{article}
+
+\usepackage{lmodern}
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=magenta,
+  filecolor=magenta,
+  urlcolor=magenta
+}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{caption}
+
+\captionsetup{%
+  width=1.0\linewidth,
+  justification=centering
+}
+
+\usepackage{enumitem} % allow characters instead of numbers
+\usepackage{verbatimbox}  % center \verbatim env in figure env
+\usepackage{siunitx}  % SI unit formatting
+\usepackage{colortbl}  % color tabular rows/columns
+\usepackage[most]{tcolorbox}
+
+% TODO: Set up captions with tcolorbox so the user doesn't have to explicitly
+%       pass a caption={} to each \lstlisting command.
+\newtcolorbox[blend into=figures]{codefigure}[1][]{%
+  enhanced jigsaw, 
+  float=!ht, 
+  breakable, 
+  frame hidden, 
+  colback=white,
+  #1
+}
+
+% Better `@' symbol
+\newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+  \endgroup
+}
+
+%\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
+
+\usepackage{xcolor}
+
+\definecolor{tableheaderrow}{HTML}{CED3DB}
+
+\definecolor{javacommentscolor}{HTML}{646464}
+\definecolor{javakeywordscolor}{HTML}{7F0055}
+\definecolor{javastringscolor}{HTML}{2A00FF}
+
+\lstset{%
+  basicstyle=\scriptsize\ttfamily, % code to be displayed as monospace
+  breaklines=true,
+  %frame=b
+  commentstyle=\color{javacommentscolor},
+  keywordstyle=\color{javakeywordscolor},
+  stringstyle=\color{javastringscolor},
+  showstringspaces=false,  % do not show string spaces character
+  tabsize=4,  % change tabs to spaces
+  keywordsprefix={@},  % capture method annotations and doctools
+  %showtabs=true,
+  %tab=|
+}
+
+% TODO: Modify listings in the next lab so that I don't have to wrap in figure
+%       env anymore -- makes the following lines irrelevant
+\renewcommand{\lstlistingname}{Figure}
+
+\newcommand{\centeredimage}[2]{%
+  \begin{center}
+    \includegraphics[scale=#1]{#2}
+  \end{center}
+}
+
+\makeatletter
+% Top-align float-only pages
+% https://tex.stackexchange.com/a/28565/96382
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+
+% Share Figure and listings counter
+\AtBeginDocument{%
+  \let\c@figure\c@lstlisting
+  \let\thefigure\thelstlisting
+  \let\ftype@lstlisting\ftype@figure
+}
+\makeatother
+
+\title{\vspace{6ex}Fundamental Programming Structures in Java\\
+  \Large IFT 194: HW 2}
+\author{Brandon Doyle\\
+\href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
+1215232174\\[1em]
+Dr. Usha Jagannathan\\
+\href{mailto:Usha.Jagannathan@asu.edu}{Usha.Jagannathan\at{}asu.edu}}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+\blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
+\section*{Section 2.1}
+\subsection*{2.1}
+The difference between the expressions \texttt{4}, \texttt{4.0}, \texttt{'4'}, and \texttt{"4"} is the type. For instance, the first is an \texttt{int}, the second may be a \texttt{double} or \texttt{float}, the third is a \texttt{char}, and the fourth is a \texttt{String} object.
+\subsection*{2.3}
+We next examine the output of the following code fragment.
+\begin{lstlisting}[language=java, xleftmargin=0.3\textwidth]
+System.out.print("Here we go!");
+System.out.println("12345");
+System.out.print("Test this if you are not sure.");
+System.out.print("Another.");
+System.out.println();
+System.out.println("All done.");
+\end{lstlisting}
+We expect this to output the following.
+\begin{verbbox}
+Here we go!12345
+Test this if you are not sure.Another.
+All done.
+\end{verbbox}
+\begin{center}
+\theverbbox
+\end{center}
+This is purely a result of using \texttt{println} as opposed to just \texttt{print}. Moreover, \texttt{println} can be \href{https://docs.oracle.com/javase/10/docs/api/java/io/PrintStream.html#println()}{called without any arguments}.
+\subsection*{2.4}
+We're asked to determine what is wrong with the following statement.
+\begin{verbbox}
+System.out.println("To be or not to be, that is the question.");
+\end{verbbox}
+\begin{center}
+\theverbbox
+\end{center}
+I honestly don't think there could be anything wrong with this statement, unless it's pointing at the fact that we may not continue strings on more than one line (as it may be formatted in the text). In that case, it is required that we use concatenation as
+\begin{verbbox}
+System.out.println("To be or not to be, that"
+    + " is the question");
+\end{verbbox}
+\begin{center}
+\theverbbox
+\end{center}
+\subsection*{2.8}
+We are asked to determine which value is contained in the primitive \texttt{int} variable \texttt{depth} after the following lines execute.
+\begin{verbbox}
+size = 18;
+size = size + 12;
+size = size * 2;
+size = size / 4;
+\end{verbbox}
+\begin{center}
+\theverbbox
+\end{center}
+These statements evaluate to
+\begin{align*}
+\dfrac{2\left(18 + 12\right)}{4}&=\boxed{15.}
+\end{align*}
+\subsection*{2.11}
+\begin{lstlisting}[language=java, xleftmargin=0.25\textwidth]
+int iResult, num1 = 25, num2 = 40, num3 = 17, num4 = 5;
+double fResult, val1 = 17.0, val2 = 12.78;
+\end{lstlisting}
+Given the above declarations, we're tasked with determining the result of several statements.
+\begin{enumerate}[label=\alph*.]
+  % a
+  \item \texttt{iResult = num1 / num4} will store the integer 5 in \texttt{iResult}.
+  % b
+  \item \texttt{fResult = num1 / num4} will store the double 5.0 in \texttt{fResult}.
+  % c
+  \item \texttt{iResult = num3 / num4} will store the integer 3 in \texttt{iResult}.
+  % d
+  \item \texttt{fResult = num3 / num4} will store the double 3.0 in \texttt{fResult}.
+  % e
+  \item \texttt{fResult = val1 / num4} will store the double 3.4 in \texttt{fResult}.
+  % f
+  \item \texttt{fResult = val1 / val2} will store the double 1.33... in \texttt{fResult}.
+  % g
+  \item \texttt{iResult = num1 / num2} will store the integer 0 in \texttt{iResult}.
+  % h
+  \item \texttt{fResult = (double)num1 / num2} will store the double 0.625 in \texttt{fResult}.
+  % i
+  \item \texttt{fResult = num1 / (double)num2} will store the double 0.625 in \texttt{fResult}.
+  % j
+  \item \texttt{fResult = (double)(num1 / num2)} will store the double 0.0 in \texttt{fResult}.
+  % k
+  \item \texttt{iResult = (int)(val1 / num4)} will store the integer \texttt{3} in \texttt{iResult}.
+  % l
+  \item \texttt{fResult = (int)(val1 / num4)} will store the double \texttt{3.0} in \texttt{fResult}.
+  % m
+  \item \texttt{fResult = (int)((double)num1 / num2)} will store the double 0.0 in \texttt{fResult}.
+  % n
+  \item \texttt{iResult = num3 \% num4} will store the integer 2 in \texttt{iResult}.
+  % o
+  \item \texttt{iResult = num2 \% num3} will store the integer 6 in \texttt{iResult}.
+  % p
+  \item \texttt{iResult = num3 \% num2} will store the integer 17 in \texttt{iResult}.
+  % q
+  \item \texttt{iResult = num2 \% num4} will store the integer 0 in \texttt{iResult}.
+\end{enumerate}
+\subsection*{2.12}
+We're tasked with stating the order in which the following expressions will be evaluated by providing a number beneath each operator.
+\begin{enumerate}[label=\alph*.]
+  % a
+  \item \begin{verbbox}
+a - b - c - d
+  1   2   3
+        \end{verbbox}
+        \theverbbox
+  % b
+  \item \begin{verbbox}
+a - b + c - d
+  1   2   3
+        \end{verbbox}
+        \theverbbox
+  % c
+  \item \begin{verbbox}
+a + b / c / d
+  3   1   2
+        \end{verbbox}
+        \theverbbox
+  % d
+  \item \begin{verbbox}
+a + b / c * d
+  3   1   2
+        \end{verbbox}
+        \theverbbox
+\end{enumerate}
+\section*{Section 2.2}
+\section*{Section 2.3}
+\end{document}

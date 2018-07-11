@@ -26,6 +26,18 @@
 \usepackage{verbatimbox}  % center \verbatim env in figure env
 \usepackage{siunitx}  % SI unit formatting
 \usepackage{colortbl}  % color tabular rows/columns
+\usepackage[most]{tcolorbox}
+
+% TODO: Set up captions with tcolorbox so the user doesn't have to explicitly
+%       pass a caption={} to each \lstlisting command.
+\newtcolorbox[blend into=figures]{codefigure}[1][]{%
+  enhanced jigsaw, 
+  float=!ht, 
+  breakable, 
+  frame hidden, 
+  colback=white,
+  #1
+}
 
 % Better `@' symbol
 \newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
@@ -40,6 +52,9 @@
 %\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
 
 \usepackage{xcolor}
+
+\definecolor{tableheaderrow}{HTML}{CED3DB}
+
 \definecolor{javacommentscolor}{HTML}{646464}
 \definecolor{javakeywordscolor}{HTML}{7F0055}
 \definecolor{javastringscolor}{HTML}{2A00FF}
@@ -58,11 +73,29 @@
   %tab=|
 }
 
+% TODO: Modify listings in the next lab so that I don't have to wrap in figure
+%       env anymore -- makes the following lines irrelevant
+\renewcommand{\lstlistingname}{Figure}
+
 \newcommand{\centeredimage}[2]{%
   \begin{center}
     \includegraphics[scale=#1]{#2}
   \end{center}
 }
+
+\makeatletter
+% Top-align float-only pages
+% https://tex.stackexchange.com/a/28565/96382
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+
+% Share Figure and listings counter
+\AtBeginDocument{%
+  \let\c@figure\c@lstlisting
+  \let\thefigure\thelstlisting
+  \let\ftype@lstlisting\ftype@figure
+}
+\makeatother
 
 \title{\vspace{6ex}The Java Programming Structure\\
   \Large IFT 194: HW 1}
