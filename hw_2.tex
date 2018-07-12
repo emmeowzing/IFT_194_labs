@@ -125,6 +125,9 @@ Dr. Usha Jagannathan\\
 \clearpage\maketitle
 \thispagestyle{empty}
 \end{titlepage}
+%\setcounter{tocdepth}{2}
+%\tableofcontents
+%\newpage
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \section*{Section 2.1}
 \subsection*{2.1}
@@ -364,9 +367,9 @@ We're given the following code segment.
 \end{figure}\\
 The problem is that it's an infinite loop. Three changes we could make to fix this are
 \begin{enumerate}
-  \item \texttt{count} could be initialized to a negative integer.
-  \item The \texttt{while}-loop's condition could be changed to \texttt{(count < x)}, where $x>50$.
-  \item The increment \texttt{count++} could be changed to a decrement \verb|count--|.
+  \item \texttt{count} could be initialized to a negative integer;
+  \item the \texttt{while}-loop's condition could be changed to \texttt{(count < x)}, where $x>50$;
+  \item the increment \texttt{count++} could be changed to a decrement \verb|count--|.
 \end{enumerate}
 \subsection*{5.10}
 We're tasked with writing a \texttt{while}-loop that verifies that the user enters a positive integer value. See \autoref{fig:four} for my solution
@@ -378,7 +381,7 @@ We're tasked with writing a \texttt{while}-loop that verifies that the user ente
   \label{fig:four}
 \end{figure}
 \subsection*{PP 5.4}
-We're asked to write a simple implementation of the game Hi-Lo. Please see \hyperref[fig:five]{Figure 4} for my solution.
+We're asked to write a simple implementation of the game Hi-Lo. Please see \hyperref[fig:five]{Figure 4} for my solution. Also, it seems I can break this program by typing a line with whitespace. I'm actively thinking and searching for a way to fix this.
 \iftcodefigure{fig:five}{HiLo.java}{/home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/HiLo.java}
 \subsection*{6.1}
 We're asked to determine how many iterations the following \texttt{for}-loops will execute.
@@ -439,7 +442,50 @@ We're asked to write a program that will output a $12\times 12$ multiplication t
 \subsection*{8.1}
 We are tasked with determining which of the following are valid (primitive) array declarations.
 \begin{enumerate}[label=\alph*.]
-  \item \texttt{int primes = \{ 2, 3, 4, 5, 7, 11 \}} -- this is not a valid array declaration (and 4 is not prime).
-  \item \texttt{float elapsedTimes[] = \{ 11.47, 12.04, 11.72, 13.88 \}} -- this is a valid array declaration.
+  \itemsep-0.3em
+  \item \texttt{int primes = \{ 2, 3, 4, 5, 7, 11 \};} -- this is not a valid array declaration because it's missing brackets after the identifier (and 4 is not prime).
+  \item \texttt{float elapsedTimes[] = \{ 11.47, 12.04, 11.72, 13.88 \};} -- this is \textit{almost} a valid declaration, with the exception that the arrays contents are implicitly doubles, whereas we'd like to use floats (half the size).
+  \item \texttt{int[] scores = int[30];} -- this is incorrect because it's missing the \texttt{new} keyword to instantiate the object.
+  \item \texttt{int[] primes = new \{ 2, 3, 5, 7, 11 \};} -- this is again invalid syntactically, because the \texttt{new} keyword is unnecessary when we're explicitly stating what we want the array to contain.
+  \item \texttt{int[] scores = new int[30];} -- this is a valid declaration and a new array object is created as a result.
+  \item \texttt{char grades[] = \{ 'a', 'b', 'c', 'd', 'f' \};} -- this is, perhaps surprisingly, valid. Apparently, there is a slight difference between pairing the brackets with the type as opposed to the identifier, but I would rather pair them with the type.
+  \item \texttt{char[] grades = new char[];} -- this is invalid because we must declare the initial size of the array object in the latter pair of brackets.
 \end{enumerate}
+\subsection*{8.4}
+We're tasked with determing the problems that can arise within the loop in \autoref{fig:ten}.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/LoopProblems.java}
+  \caption{LoopProblems.java.}
+  \label{fig:ten}
+\end{figure}
+I immediately noticed that it's indexed at 1, which is problem because arrays are indexed at 0. Hence, \texttt{i} should start at 0 and proceed until \texttt{i < numbers.length} is violated.
+\subsection*{8.5}
+In this problem we're asked to write array declarations to represent students' names for a class of 25 students and students' test grades for a class of 40. See my solutions in \autoref{fig:eleven}.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/ArrayDeclarations.java}
+  \caption{ArrayDeclarations.java}
+  \label{fig:eleven}
+\end{figure}
+\subsection*{8.6}
+We're asked to write code that initializes an entire array to the constant \texttt{INITIAL}. See \autoref{fig:twelve} for my solution.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/Initialization.java}
+  \caption{Initialization.java.}
+  \label{fig:twelve}
+\end{figure}
+\subsection*{8.7}
+Here we're asked to print all the elements of an array called \texttt{names} backward. See \autoref{fig:thirteen} for my solution.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/Backwards.java}
+  \caption{Backwards.java.}
+  \label{fig:thirteen}
+\end{figure}
 \end{document}
