@@ -61,7 +61,7 @@
 \definecolor{javastringscolor}{HTML}{2A00FF}
 
 \lstset{%
-  basicstyle=\scriptsize\ttfamily, % code to be displayed as monospace
+  basicstyle=\linespread{0.8}\scriptsize\ttfamily, % code to be displayed as monospace
   breaklines=true,
   %frame=b
   commentstyle=\color{javacommentscolor},
@@ -71,7 +71,8 @@
   tabsize=4,  % change tabs to spaces
   keywordsprefix={@},  % capture method annotations and doctools
   %showtabs=true,
-  %tab=|
+  %tab=|,
+  xleftmargin=1cm % distinguish between text and code better
 }
 
 % TODO: Modify listings in the next lab so that I don't have to wrap in figure
@@ -82,6 +83,16 @@
   \begin{center}
     \includegraphics[scale=#1]{#2}
   \end{center}
+}
+
+% Label, caption, and code path
+\newcommand{\iftcodefigure}[3]{%
+  \begin{codefigure}
+    \label{#1}
+    \addtocounter{figure}{-1}
+    \lstinputlisting[language=java, caption={#2}, captionpos=b]{%
+      #3}
+  \end{codefigure}
 }
 
 \makeatletter
@@ -176,6 +187,7 @@ double fResult, val1 = 17.0, val2 = 12.78;
 \end{lstlisting}
 Given the above declarations, we're tasked with determining the result of several statements.
 \begin{enumerate}[label=\alph*.]
+  \itemsep-0.2em
   % a
   \item \texttt{iResult = num1 / num4} will store the integer 5 in \texttt{iResult}.
   % b
@@ -214,6 +226,7 @@ Given the above declarations, we're tasked with determining the result of severa
 \subsection*{2.12}
 We're tasked with stating the order in which the following expressions will be evaluated by providing a number beneath each operator.
 \begin{enumerate}[label=\alph*.]
+  \itemsep-1em
   % a
   \item \begin{verbbox}
 a - b - c - d
@@ -238,7 +251,195 @@ a + b / c * d
   3   1   2
         \end{verbbox}
         \theverbbox
+  % e
+  \item \begin{verbbox}
+a / b * c * d
+  1   2   3
+        \end{verbbox}
+        \theverbbox
+  % f
+  \item \begin{verbbox}
+a % b / c * d
+  1   2   3
+        \end{verbbox}
+        \theverbbox
+  % g
+  \item \begin{verbbox}
+a % b % c % d
+  1   2   3
+        \end{verbbox}
+        \theverbbox
+  % h
+  \item \begin{verbbox}
+a - (b - c) - d
+  2    1    3
+        \end{verbbox}
+        \theverbbox
+  % i
+  \item \begin{verbbox}
+(a - (b - c)) - d
+   2    1     3
+        \end{verbbox}
+        \theverbbox
+  % j
+  \item \begin{verbbox}
+a - ((b - c) - d)
+  3     1    2
+        \end{verbbox}
+        \theverbbox
+  % k
+  \item \begin{verbbox}
+a % (b % c) * d * e
+  2    1    3   4
+        \end{verbbox}
+        \theverbbox
+  % l
+  \item \begin{verbbox}
+a + (b - c) * d - e
+  3    1    2   4
+        \end{verbbox}
+        \theverbbox
+  % m
+  \item \begin{verbbox}
+(a + b) * c + d * e
+   1    2   4   3
+        \end{verbbox}
+        \theverbbox
 \end{enumerate}
 \section*{Section 2.2}
+\subsection*{5.2}
+We are tasked with determining what the issue may be with the \texttt{if-else} blocks in the following source.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/Fragment1.java}
+  \caption{Fragment1.java.}
+  \label{fig:one}
+\end{figure}\\
+The problem is actually a \href{https://stackoverflow.com/a/2125207/3928184}{well-documented feature} of C-like languages: because C and Java ignore whitespace, indentation, despite being important for readability, is also ignored by the lexer. This means that Java has no way of knowing if we meant
+\begin{verbbox}
+if (X)
+    if (Y)
+        <block>
+else
+    <another block>
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+or
+\begin{verbbox}
+if (X)
+    if (Y)
+        <block>
+    else
+        <another block>
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+By default, Java appears to pair this \texttt{else}-statement with the nested \texttt{if}, which can be seen by setting \texttt{sum = 3} in my example in \autoref{fig:one} (which produces an incorrect result).
+\subsection*{5.3}
+We are asked if the following code segment is valid if part of an otherwise valid program.
+\begin{figure}[h!]
+  \centering
+  \begin{lstlisting}[language=java, xleftmargin=0.25\textwidth]
+...
+if (length = MIN_LENGTH)
+    System.out.println("The length is minimal.");
+...
+  \end{lstlisting}
+  %\caption{Fragment1.java.}
+  \label{fig:two}
+\end{figure}\\
+This is of course invalid due to the assignment operator in the \texttt{if}-statement's condition instead of \texttt{==}.
+\subsection*{5.9}
+We're given the following code segment.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/Loop.java}
+  \caption{Loop.java.}
+  \label{fig:three}
+\end{figure}\\
+The problem is that it's an infinite loop. Three changes we could make to fix this are
+\begin{enumerate}
+  \item \texttt{count} could be initialized to a negative integer.
+  \item The \texttt{while}-loop's condition could be changed to \texttt{(count < x)}, where $x>50$.
+  \item The increment \texttt{count++} could be changed to a decrement \verb|count--|.
+\end{enumerate}
+\subsection*{5.10}
+We're tasked with writing a \texttt{while}-loop that verifies that the user enters a positive integer value. See \autoref{fig:four} for my solution
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/PositiveInput.java}
+  \caption{PositiveInput.java.}
+  \label{fig:four}
+\end{figure}
+\subsection*{PP 5.4}
+We're asked to write a simple implementation of the game Hi-Lo. Please see \hyperref[fig:five]{Figure 4} for my solution.
+\iftcodefigure{fig:five}{HiLo.java}{/home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/HiLo.java}
+\subsection*{6.1}
+We're asked to determine how many iterations the following \texttt{for}-loops will execute.
+\begin{enumerate}[label=\alph*.]
+  \itemsep-0.3em
+  \item \texttt{for (int i = 0; i < 20; ++i) \{\}} -- this loop will iterate 20 times.
+  \item \texttt{for (int i = 0; i <= 20; ++i) \{\}} -- this loop will iterate 21 times.
+  \item \texttt{for (int i = 5; i < 20; ++i) \{\}} -- this loop will iterate 15 times.
+  \item \verb|for (int i = 20; i > 0; --i) {}| -- this loop will iterate 20 times.
+  \item \texttt{for (int i = 1; i < 20; i += 2) \{\}} -- this loop will iterate 10 times.
+  \item \texttt{for (int i = 1; i < 20; i *= 2) \{\}} -- this loop will iterate 5 times.
+\end{enumerate}
+\subsection*{6.4}
+We're asked to transform the following \texttt{while}-loop into an equivalent \texttt{do-while}-loop.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/While.java}
+  \caption{While.java.}
+  \label{fig:five}
+\end{figure}\\
+I arrive at the following solution.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/DoWhile.java}
+  \caption{DoWhile.java.}
+  \label{fig:six}
+\end{figure}
+\subsection*{6.8}
+We're asked to write a \texttt{for}-loop that will print the multiples of $3$ from $300$ down to $3$. See \autoref{fig:seven} for my solution.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/Multiples.java}
+  \caption{Multiples.java.}
+  \label{fig:seven}
+\end{figure}
+\subsection*{6.9}
+We're asked to write a program that will accept 10 integers from a user and print the largest. See \autoref{fig:eight} for my solution.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/Largest.java}
+  \caption{Loop.java.}
+  \label{fig:eight}
+\end{figure}
+\subsection*{PP 6.3}
+We're asked to write a program that will output a $12\times 12$ multiplication table to the console. Please see \autoref{fig:nine} for my solution.
+\begin{figure}[h!]
+  \centering
+  \lstinputlisting[language=java]{%
+    /home/brandon/eclipse-workspace/ift_194_hw/src/hw_2/MultiplicationTable.java}
+  \caption{MultiplicationTable.java.}
+  \label{fig:nine}
+\end{figure}
 \section*{Section 2.3}
+\subsection*{8.1}
+We are tasked with determining which of the following are valid (primitive) array declarations.
+\begin{enumerate}[label=\alph*.]
+  \item \texttt{int primes = \{ 2, 3, 4, 5, 7, 11 \}} -- this is not a valid array declaration (and 4 is not prime).
+  \item \texttt{float elapsedTimes[] = \{ 11.47, 12.04, 11.72, 13.88 \}} -- this is a valid array declaration.
+\end{enumerate}
 \end{document}

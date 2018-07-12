@@ -23,6 +23,7 @@
   justification=centering
 }
 
+\usepackage{enumitem} % allow characters instead of numbers
 \usepackage{verbatimbox}  % center \verbatim env in figure env
 \usepackage{siunitx}  % SI unit formatting
 \usepackage{colortbl}  % color tabular rows/columns
@@ -60,7 +61,7 @@
 \definecolor{javastringscolor}{HTML}{2A00FF}
 
 \lstset{%
-  basicstyle=\scriptsize\ttfamily, % code to be displayed as monospace
+  basicstyle=\linespread{0.8}\scriptsize\ttfamily, % code to be displayed as monospace
   breaklines=true,
   %frame=b
   commentstyle=\color{javacommentscolor},
@@ -70,7 +71,8 @@
   tabsize=4,  % change tabs to spaces
   keywordsprefix={@},  % capture method annotations and doctools
   %showtabs=true,
-  %tab=|
+  %tab=|,
+  xleftmargin=1cm
 }
 
 % TODO: Modify listings in the next lab so that I don't have to wrap in figure
@@ -81,6 +83,17 @@
   \begin{center}
     \includegraphics[scale=#1]{#2}
   \end{center}
+}
+
+%% Make a multi-page code figure (only way I've figured out how to do this conveniently as of yet).
+% Label, caption, and code path
+\newcommand{\iftcodefigure}[3]{%
+  \begin{codefigure}
+    \label{#1}
+    \addtocounter{figure}{-1}
+    \lstinputlisting[language=java, caption={#2}, captionpos=b]{%
+      #3}
+  \end{codefigure}
 }
 
 \makeatletter
