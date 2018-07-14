@@ -169,19 +169,18 @@ System.out.println("To be or not to be, that"
 \theverbbox
 \end{center}
 \subsection*{2.8}
-We are asked to determine which value is contained in the primitive \texttt{int} variable \texttt{depth} after the following lines execute.
+We are asked to determine which value is contained in the primitive \texttt{double} variable \texttt{depth} after the following lines execute.
 \begin{verbbox}
-size = 18;
-size = size + 12;
-size = size * 2;
-size = size / 4;
+depth = 2.4;
+depth = 20 - depth * 4;
+depth = depth / 5;
 \end{verbbox}
 \begin{center}
 \theverbbox
 \end{center}
 These statements evaluate to
 \begin{align*}
-\dfrac{2\left(18 + 12\right)}{4}&=\boxed{15.}
+\dfrac{20 - 2.4\times 4}{5}&=\boxed{2.08.}
 \end{align*}
 \subsection*{2.11}
 \begin{lstlisting}[language=java, xleftmargin=0.25\textwidth]
