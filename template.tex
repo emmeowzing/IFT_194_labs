@@ -102,6 +102,10 @@
 \setlength{\@fptop}{0pt}
 \setlength{\@fpbot}{0pt plus 1fil}
 
+% Set up the table of contents so that titles are displayed
+\renewcommand*\contentsname{Summary}
+\setcounter{secnumdepth}{0}
+
 % Share Figure and listings counter
 \AtBeginDocument{%
   \let\c@figure\c@lstlisting
@@ -126,6 +130,8 @@ Dr. Usha Jagannathan\\
 \clearpage\maketitle
 \thispagestyle{empty}
 \end{titlepage}
+\tableofcontents
+\newpage
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 Content
 \end{document}
