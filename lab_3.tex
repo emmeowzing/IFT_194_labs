@@ -133,13 +133,56 @@ Dr. Usha Jagannathan\\
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \section{Prelab Exercises}
 \begin{enumerate}
-  \item Class constructors are special methods that are called when the \texttt{new} operator is used to create a new instance of a class.
+  \item Class constructors are special methods that are called when the \texttt{new} operator is used to create a new instance of a class. These methods typically set up attributes of the class.
 
         There are a few differences between regular methods and class constructors (special methods). First and foremost, constructors cannot have a return value, and neither is a return type specified in the method header. Secondly, constructors have the same name as the containing class. Thus, if I were to write a class \texttt{Animal}, this class' constructors would also have the name \texttt{Animal}.
-  \item Access modifiers, which include \texttt{public} and \texttt{private}, among others, are used to determine what 
+  \item Access or visibility modifiers, which include \texttt{public} and \texttt{private}, among others, are used to determine where a variable or method of a class may be accessed from. For example, a public method or field variable may be accessed from outside an instance, whereas in the latter case they may only be used from inside the instance.
+
+        A programmer can decide if a variable should be public based on what that variable may store. Likewise, a programmer may make a method public if it plays a vital role in the class' interface to other classes. Private methods are typically used to provide support to public methods. We should also keep \textit{encapsulation} in mind, which suggests that a class should not allow other classes to modify its state by ``reaching in'' and modifying a value. Rather, we should provide an interface, perhaps through a public method, that has the ability to modify its state. This being said, it is perfectly fine to define publicly-accessible constants as long as they are preceeded by \texttt{final}, declaring the value immutable.
+
+        There are a lot of best-practices suggested throughout the text for this course. I completely support them, knowing that things can easily get out of hand as a code base becomes large enough that a single person can no longer maintain or extend it.
+  \item In this problem we consider a class that may represent a bank account.
+        \begin{enumerate}[label=\alph*.]
+          \item To hold information about an account balance, the name of the account holder, and an account number, I might define the following field variables.
+                \begin{lstlisting}[language=java, xleftmargin=0.3\textwidth]
+private double balance = 0.0;
+final private String accountHolder;
+final private int[] accountNumber;
+                \end{lstlisting}
+                The \texttt{accountHolder} and \texttt{accountNumber} fields are declared \texttt{final} because I don't want them to be modifiable once the class is instantiated. Moreover, all variables are private, because I wouldn't want this information to be accessible by other classes or objects unless the proper indentification is provided or process completed.
+          \item In this sub-problem, we're asked to write method headers for each of the examples provided.
+                \begin{enumerate}[label=\roman*.]
+                  \item To withdraw a certain amount of money from the account -- change the account balance and do not return a value.
+                        \begin{lstlisting}[language=java, xleftmargin=0.22\textwidth]
+public void withdraw(double amount) { ... }
+                        \end{lstlisting}
+                  \item Deposit a certain amount into the account and do not return a value.
+                        \begin{lstlisting}[language=java, xleftmargin=0.2\textwidth]
+public void deposit(double amount) { ... }
+                        \end{lstlisting}
+                  \item Get the current balance of the account.
+                        \begin{lstlisting}[language=java, xleftmargin=0.06\textwidth]
+public double getBalance(/* something to check credentials? */) { ... }
+                        \end{lstlisting}
+                  \item Return a string with account information, including name, account number, and balance.
+                        \begin{lstlisting}[language=java, xleftmargin=0.05\textwidth]
+public String getAccountInfo(/* Again, check credentials? */) { ... }
+                        \end{lstlisting}
+                  \item Charge a \$10 fee.
+                        \begin{lstlisting}[language=java, xleftmargin=0.18\textwidth]
+public void chargeFee(double amount) { ... }
+                        \end{lstlisting}
+                  \item A constructor that requires the initial balance, name of the owner, and account number.
+                        \begin{lstlisting}[language=java, xleftmargin=0.01\textwidth]
+public BankAccount(double initialBalance, String owner, int[] acctNumber) { ... }
+                        \end{lstlisting}
+                \end{enumerate}
+        \end{enumerate}
 \end{enumerate}
 \section{Bank Account Class}
-\subsection{Code}
+\begin{enumerate}
+  \item For this question, I've reproduced the code provided in the lab in \autoref{fig:one}.
+\end{enumerate}
 \section{Tracking Grades}
 \section{Band Booster Class}
 \section{Representing Names}
