@@ -181,8 +181,35 @@ public BankAccount(double initialBalance, String owner, int[] acctNumber) { ... 
 \end{enumerate}
 \section{Bank Account Class}
 \begin{enumerate}
-  \item For this question, I've reproduced the code provided in the lab in \autoref{fig:one}.
+  \item For this question, I've reproduced the code provided in the lab in \hyperref[fig:one]{Figure 1}.
+        \begin{enumerate}[label=\alph*.]
+          \item Please see my implementation of \texttt{toString} in the aforementioned figure, which overrides \texttt{Object}'s default implementation. Also, I've used the \texttt{String} class' \texttt{format} method, which allows us to shorten this line somewhat, in addition to limiting the display of account balance to 2 decimal places.
+          \item For the \texttt{chargeFee} method, I've actually used method overloading so that a default fee of \$10 may be charged to an account if no arguments are supplied.
+          \item See the aforementioned figure regarding changes to both \texttt{chargeFee} methods.
+          \item See the aforementioned figure for my implementation of the \texttt{changeName} method. My implementation also requires the argument to have content.
+        \end{enumerate}
+  \item See \hyperref[fig:two]{Figure 2} for my implementation of \texttt{ManageAccounts.java}. The program's output is as follows.
+        \begin{verbbox}[\mbox{}\scriptsize]
+Joe's new balance: 600.0
+New balance: 950.00
+Sally's new balance: 950.0
+
+Name: Sally
+Acct Number: 0000000001
+Balance: 940.00
+
+Name: Joseph
+Acct Number: 0000000002
+Balance: 565.00
+        \end{verbbox}
+        \begin{center}
+          \theverbbox
+        \end{center}
 \end{enumerate}
+\iftcodefigure{fig:one}{Account.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_3/Account.java}
+\iftcodefigure{fig:two}{ManageAccounts.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_3/ManageAccounts.java}
 \section{Tracking Grades}
 \section{Band Booster Class}
 \section{Representing Names}
