@@ -60,10 +60,11 @@
 \definecolor{javakeywordscolor}{HTML}{7F0055}
 \definecolor{javastringscolor}{HTML}{2A00FF}
 
+\definecolor{background}{HTML}{F2F7FF}
+
 \lstset{%
   basicstyle=\linespread{0.8}\scriptsize\ttfamily, % code to be displayed as monospace
   breaklines=true,
-  %frame=b
   commentstyle=\color{javacommentscolor},
   keywordstyle=\color{javakeywordscolor},
   stringstyle=\color{javastringscolor},
@@ -72,7 +73,7 @@
   keywordsprefix={@},  % capture method annotations and doctools
   %showtabs=true,
   %tab=|,
-  xleftmargin=1cm
+  xleftmargin=1cm,
 }
 
 % TODO: Modify listings in the next lab so that I don't have to wrap in figure
@@ -91,8 +92,14 @@
   \begin{codefigure}
     \label{#1}
     \addtocounter{figure}{-1}
-    \lstinputlisting[language=java, caption={#2}, captionpos=b]{%
-      #3}
+    \lstinputlisting[language=java, 
+                     backgroundcolor=\color{background},
+                     framexleftmargin=10pt,
+                     framextopmargin=6pt,
+                     framexbottommargin=6pt,
+                     frame=tb,
+                     framerule=0pt, 
+                     caption={#2}, captionpos=b]{#3}
   \end{codefigure}
 }
 
@@ -144,7 +151,7 @@ Dr. Usha Jagannathan\\
   \item In this problem we consider a class that may represent a bank account.
         \begin{enumerate}[label=\alph*.]
           \item To hold information about an account balance, the name of the account holder, and an account number, I might define the following field variables.
-                \begin{lstlisting}[language=java, xleftmargin=0.3\textwidth]
+                \begin{lstlisting}[language=java, xleftmargin=0.3\textwidth, backgroundcolor=\color{white}]
 private double balance = 0.0;
 final private String accountHolder;
 final private int[] accountNumber;
@@ -153,27 +160,27 @@ final private int[] accountNumber;
           \item In this sub-problem, we're asked to write method headers for each of the examples provided.
                 \begin{enumerate}[label=\roman*.]
                   \item To withdraw a certain amount of money from the account -- change the account balance and do not return a value.
-                        \begin{lstlisting}[language=java, xleftmargin=0.22\textwidth]
+                    \begin{lstlisting}[language=java, xleftmargin=0.22\textwidth, backgroundcolor=\color{white}]
 public void withdraw(double amount) { ... }
                         \end{lstlisting}
                   \item Deposit a certain amount into the account and do not return a value.
-                        \begin{lstlisting}[language=java, xleftmargin=0.2\textwidth]
+                        \begin{lstlisting}[language=java, xleftmargin=0.2\textwidth, backgroundcolor=\color{white}]
 public void deposit(double amount) { ... }
                         \end{lstlisting}
                   \item Get the current balance of the account.
-                        \begin{lstlisting}[language=java, xleftmargin=0.06\textwidth]
+                        \begin{lstlisting}[language=java, xleftmargin=0.06\textwidth, backgroundcolor=\color{white}]
 public double getBalance(/* something to check credentials? */) { ... }
                         \end{lstlisting}
                   \item Return a string with account information, including name, account number, and balance.
-                        \begin{lstlisting}[language=java, xleftmargin=0.05\textwidth]
+                        \begin{lstlisting}[language=java, xleftmargin=0.05\textwidth, backgroundcolor=\color{white}]
 public String getAccountInfo(/* Again, check credentials? */) { ... }
                         \end{lstlisting}
                   \item Charge a \$10 fee.
-                        \begin{lstlisting}[language=java, xleftmargin=0.18\textwidth]
+                        \begin{lstlisting}[language=java, xleftmargin=0.18\textwidth, backgroundcolor=\color{white}]
 public void chargeFee(double amount) { ... }
                         \end{lstlisting}
                   \item A constructor that requires the initial balance, name of the owner, and account number.
-                        \begin{lstlisting}[language=java, xleftmargin=0.01\textwidth]
+                        \begin{lstlisting}[language=java, xleftmargin=0.01\textwidth, backgroundcolor=\color{white}]
 public BankAccount(double initialBalance, String owner, int[] acctNumber) { ... }
                         \end{lstlisting}
                 \end{enumerate}
@@ -211,6 +218,91 @@ Balance: 565.00
 \iftcodefigure{fig:two}{ManageAccounts.java}{%
   /home/brandon/eclipse-workspace/ift_194_labs/src/lab_3/ManageAccounts.java}
 \section{Tracking Grades}
+In this section we're tasked with writing a class that permits a teacher to keep track of grades attributed to each student. Please see \hyperref[fig:three]{Figure 3} and \hyperref[fig:four]{Figure 4} for my solution. See below for another example session.
+\begin{verbbox}[\mbox{}\scriptsize]
+Enter student's grade for test #1: 50
+Enter student's grade for test #2: 75
+The average for Mary is: 62.50
+
+Enter student's grade for test #1: 75
+Enter student's grade for test #2: 50
+The average for Mike is: 62.50
+
+Name: Mary
+Test 1: 50.00
+Test 2: 75.00
+
+Name: Mike
+Test 1: 75.00
+Test 2: 50.00
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+\iftcodefigure{fig:three}{Student.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_3/Student.java}
+\iftcodefigure{fig:four}{Grades.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_3/Grades.java}
 \section{Band Booster Class}
+In this exercise we're tasked with writing a class that maintains the state of a band booster and keeps track of band candy sales over 3 weeks. Please see \hyperref[fig:five]{Figure 5} for my solution. Below is another example session, demonstrating how my program works.
+\begin{verbbox}[\scriptsize\mbox{}]
+Please enter a name: Brandon
+Would you like to enter a another booster? [y|n]: yes
+Please enter a name: Alison
+Would you like to enter a another booster? [y|n]: n
+
+    Week 1
+
+Enter a number of sales for Brandon for this week: 50
+Enter a number of sales for Alison for this week: 52
+
+    Week 2
+
+Enter a number of sales for Brandon for this week: 30
+Enter a number of sales for Alison for this week: 60
+
+    Week 3
+
+Enter a number of sales for Brandon for this week: 70
+Enter a number of sales for Alison for this week: 55
+
+Summary: 
+
+    Brandon: 150
+    Alison: 167
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+\iftcodefigure{fig:five}{BandBooster.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_3/BandBooster.java}
 \section{Representing Names}
+In this section we're tasked with writing a class that stores a person's first, middle, and last names. Please see \hyperref[fig:six]{Figure 6} and \hyperref[fig:seven]{Figure 7} for my solution. Also, below is a sample session.
+\begin{verbbox}[\mbox{}\scriptsize]
+Enter a name: Brandon James
+*** Error: Please enter a First, Middle, and Last name, separated by space
+Enter a name: Brandon James       Doyle
+Enter a name: Brandon James Doyle
+
+Brandon James Doyle
+Doyle, Brandon James
+BJD
+17
+
+Brandon James Doyle
+Doyle, Brandon James
+BJD
+17
+
+The names are equal
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+\iftcodefigure{fig:six}{Name.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_3/Name.java}
+\iftcodefigure{fig:seven}{TestNames.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_3/TestNames.java}
+\section{Conclusion}
+In this lab I came across a number of new challenges. For instance, I wanted to put constraints on incoming values accepted by methods in my classes (hence the \texttt{throws IllegalArgumentException}s). I'm also trying to decide what kind of semantics make sense while I'm designing a class. I try to keep in mind how my class may be used; e.g. how can I make the API more convenient? What kind of type should I use to represent this information (again, what limits do I want to put on the inputs)?
 \end{document}

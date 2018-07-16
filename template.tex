@@ -91,8 +91,14 @@
   \begin{codefigure}
     \label{#1}
     \addtocounter{figure}{-1}
-    \lstinputlisting[language=java, caption={#2}, captionpos=b]{%
-      #3}
+    \lstinputlisting[language=java, 
+                     backgroundcolor=\color{background},
+                     framexleftmargin=10pt,
+                     framextopmargin=6pt,
+                     framexbottommargin=6pt,
+                     frame=tb,
+                     framerule=0pt, 
+                     caption={#2}, captionpos=b]{#3}
   \end{codefigure}
 }
 
