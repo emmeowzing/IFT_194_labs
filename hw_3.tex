@@ -1,0 +1,242 @@
+\documentclass[leqno, 11pt]{article}
+
+\usepackage{lmodern}
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=magenta,
+  filecolor=magenta,
+  urlcolor=magenta
+}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{caption}
+
+\captionsetup{%
+  width=1.0\linewidth,
+  justification=centering
+}
+
+\usepackage{enumitem} % allow characters instead of numbers
+\usepackage{verbatimbox}  % center \verbatim env in figure env
+\usepackage{siunitx}  % SI unit formatting
+\usepackage{colortbl}  % color tabular rows/columns
+\usepackage[most]{tcolorbox}
+
+% TODO: Set up captions with tcolorbox so the user doesn't have to explicitly
+%       pass a caption={} to each \lstlisting command.
+\newtcolorbox[blend into=figures]{codefigure}[1][]{%
+  enhanced jigsaw, 
+  float=!ht, 
+  breakable, 
+  frame hidden, 
+  colback=white,
+  #1
+}
+
+% Better `@' symbol
+\newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+  \endgroup
+}
+
+%\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
+
+\usepackage{xcolor}
+
+\definecolor{tableheaderrow}{HTML}{CED3DB}
+
+\definecolor{javacommentscolor}{HTML}{646464}
+\definecolor{javakeywordscolor}{HTML}{7F0055}
+\definecolor{javastringscolor}{HTML}{2A00FF}
+
+\definecolor{background}{HTML}{F2F7FF}
+
+\lstset{%
+  basicstyle=\linespread{0.8}\scriptsize\ttfamily, % code to be displayed as monospace
+  breaklines=true,
+  %frame=b
+  commentstyle=\color{javacommentscolor},
+  keywordstyle=\color{javakeywordscolor},
+  stringstyle=\color{javastringscolor},
+  showstringspaces=false,  % do not show string spaces character
+  tabsize=4,  % change tabs to spaces
+  keywordsprefix={@},  % capture method annotations and doctools
+  %showtabs=true,
+  %tab=|,
+  xleftmargin=1cm
+}
+
+% TODO: Modify listings in the next lab so that I don't have to wrap in figure
+%       env anymore -- makes the following lines irrelevant
+\renewcommand{\lstlistingname}{Figure}
+
+\newcommand{\centeredimage}[2]{%
+  \begin{center}
+    \includegraphics[scale=#1]{#2}
+  \end{center}
+}
+
+%% Make a multi-page code figure (only way I've figured out how to do this conveniently as of yet).
+% Label, caption, and code path
+\newcommand{\iftcodefigure}[3]{%
+  \begin{codefigure}
+    \label{#1}
+    \addtocounter{figure}{-1}
+    \lstinputlisting[language=java, 
+                     backgroundcolor=\color{background},
+                     framexleftmargin=10pt,
+                     framextopmargin=6pt,
+                     framexbottommargin=6pt,
+                     frame=tb,
+                     framerule=0pt, 
+                     caption={#2}, captionpos=b]{#3}
+  \end{codefigure}
+}
+
+\makeatletter
+% Top-align float-only pages
+% https://tex.stackexchange.com/a/28565/96382
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+
+% Set up the table of contents so that titles are displayed
+\renewcommand*\contentsname{Summary}
+\setcounter{secnumdepth}{0}
+
+% Share Figure and listings counter
+\AtBeginDocument{%
+  \let\c@figure\c@lstlisting
+  \let\thefigure\thelstlisting
+  \let\ftype@lstlisting\ftype@figure
+}
+\makeatother
+
+\title{\vspace{6ex}Object-Oriented Programming in Java\\
+  \Large IFT 194: HW 3}
+\author{Brandon Doyle\\
+\href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
+1215232174\\[1em]
+Dr. Usha Jagannathan\\
+\href{mailto:Usha.Jagannathan@asu.edu}{Usha.Jagannathan\at{}asu.edu}}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+\tableofcontents
+\newpage
+\blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
+\section{Homework 3.1}
+\subsection{3.3}
+In this question we're asked to declare a \texttt{String} variable and initialize it to contain the same characters as another, except in all uppercase characters.
+\begin{lstlisting}[language=java, xleftmargin=0.37\textwidth]
+...
+String name = "Brandon Doyle";
+String str = name.toUpperCase();
+...
+\end{lstlisting}
+\subsection{3.8}
+We're tasked with using the \texttt{java.util.Random} class to generate random numbers in the specified ranges. See my solution in \hyperref[fig:one]{Figure 1}.
+\iftcodefigure{fig:one}{Rand.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_3/Rand.java}
+\subsection{3.9}
+In this question we're asked to write an expression that computes the square root of a sum and stores the result in a variable. I would write this as follows.
+\begin{lstlisting}[language=java, xleftmargin=0.33\textwidth]
+...
+double num1 = 1.0, num2 = 2.0;
+double num3 = Math.sqrt(num1 + num2);
+...
+\end{lstlisting}
+\subsection{3.10}
+In this question we're asked to write a single statement that computes the absolute value of a variable \texttt{total}. I would write this as follows.
+\begin{lstlisting}[language=java, xleftmargin=0.35\textwidth]
+var absTotal = Math.abs(total);
+\end{lstlisting}
+Note also that I've used local variable type inference, because there exists an overloaded method for \texttt{long}, \texttt{int}, \texttt{float}, and \texttt{double} types.
+
+Alternatively, we might write something as follows, which does not use any library methods.
+\begin{lstlisting}[language=java, xleftmargin=0.28\textwidth]
+var absTotal = (total < 0) ? -total : total;
+\end{lstlisting}
+\subsection{3.11}
+In this problem we're asked to write code that will create a \texttt{DecimalFormaat} object to round a value to 4 decimal places. Please see my solution in \hyperref[fig:two]{Figure 2}.
+\iftcodefigure{fig:two}{Formatter.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_3/Formatter.java}\\
+This program outputs \texttt{3.1416} to my console.
+
+Something I came across that I found rather interesting is there's no need to call \texttt{String.format} in \texttt{System.out.println} because we also have \texttt{System.out.printf}, which is very similar to C's \texttt{printf} function (defined in \texttt{stdio.h}). I'll be sure to remember this while writing future labs and homework.
+\subsection{3.12}
+In this problem we're tasked with obtaining a double from the user and printing that value to the fourth power to 3 decimal places. Please see \hyperref[fig:three]{Figure 3} for my solution.
+\iftcodefigure{fig:three}{GetOutput.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_3/GetOutput.java}\\
+The following is an example session.
+\begin{verbbox}[\mbox{}\scriptsize]
+Enter a double: hello
+*** Error: please enter a double
+Enter a double: 33.214526252
+33.215^4 = 1217060.730
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+\section{Homework 3.2}
+\subsection{4.1}
+In this question we're asked to determine which objects in the following pairs may be a subclass and parent class.
+\begin{enumerate}[label=\alph*.]
+  \itemsep-0.2em
+  \item \texttt{Superhero}, \texttt{Superman} -- in this case, \texttt{Superhero} would be the parent class and \texttt{Superman} the subclass.
+  \item \texttt{Justin}, \texttt{Person} -- \texttt{Justin} is the subclass, and \texttt{Person} the parent class.
+  \item \texttt{Rover}, \texttt{Pet} -- \texttt{Rover} is the subclass and \texttt{Pet} is the superclass.
+  \item \texttt{Magazine}, \texttt{Time} -- \texttt{Time} is the subclass and \texttt{Magazine} is the superclass.
+  \item \texttt{Christmas}, \texttt{Holiday} -- \texttt{Christmas} is the subclass and \texttt{Holiday} is the subclass.
+\end{enumerate}
+\subsection{4.4}
+Attributes I may include in a class \texttt{Course} to represent a college course include
+\begin{itemize}
+  \itemsep-0.2em
+  \item a list of instructors' names;
+  \item the number of credits that can be earned;
+  \item the course's name and related attributes, such as the course number;
+  \item the start and end dates of the course (could be encoded in \href{https://docs.oracle.com/javase/10/docs/api/java/sql/Date.html}{\texttt{Date}});
+  \item location of the class;
+  \item and a list of students.
+\end{itemize}
+Methods or operations I would write include
+\begin{itemize}
+  \itemsep-0.2em
+  \item a method to add or remove students from the course;
+  \item a method to modify the location of the course;
+  \item and a method to modify the number of credits a course may be.
+\end{itemize}
+\subsection{4.5}
+In this question we're asked to write a method that has no return value and accepts no arguments that prints the lyrics of a song to the console. Please see my solution in \hyperref[fig:four]{Figure 4}.
+\iftcodefigure{fig:four}{Lyrics.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_3/Lyrics.java}
+\subsection{4.6}
+In this problem we're asked to write a method that accepts one integer parameter and returns the value raised to the third power. Please see \hyperref[fig:five]{Figure 5} for my solution.
+\iftcodefigure{fig:five}{Cube.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_3/Cube.java}
+\subsection{4.10}
+In this problem we're asked to write the constructor of a class called \texttt{Movie} that initializes fields \texttt{name} and \texttt{director}. See \hyperref[fig:six]{Figure 6} for my solution.
+\iftcodefigure{fig:six}{Movie.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_3/Movie.java}
+\subsection{4.11}
+In this question we're asked to write a getter and setter method for a field variable \texttt{age} in a class called \texttt{Child}. Please see my solution in \hyperref[fig:seven]{Figure 7}.
+\iftcodefigure{fig:seven}{Child.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_3/Child.java}
+\end{document}
