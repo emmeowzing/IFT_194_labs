@@ -1,0 +1,157 @@
+\documentclass[leqno, 11pt]{article}
+
+\usepackage{lmodern}
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=magenta,
+  filecolor=magenta,
+  urlcolor=magenta
+}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{caption}
+
+\captionsetup{%
+  width=1.0\linewidth,
+  justification=centering
+}
+
+\usepackage{enumitem} % allow characters instead of numbers
+\usepackage{verbatimbox}  % center \verbatim env in figure env
+\usepackage{siunitx}  % SI unit formatting
+\usepackage{colortbl}  % color tabular rows/columns
+\usepackage[most]{tcolorbox}
+
+% TODO: Set up captions with tcolorbox so the user doesn't have to explicitly
+%       pass a caption={} to each \lstlisting command.
+\newtcolorbox[blend into=figures]{codefigure}[1][]{%
+  enhanced jigsaw, 
+  float=!ht, 
+  breakable, 
+  frame hidden, 
+  colback=white,
+  #1
+}
+
+% Better `@' symbol
+\newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+  \endgroup
+}
+
+%\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
+
+\usepackage{xcolor}
+
+\definecolor{tableheaderrow}{HTML}{CED3DB}
+
+\definecolor{javacommentscolor}{HTML}{646464}
+\definecolor{javakeywordscolor}{HTML}{7F0055}
+\definecolor{javastringscolor}{HTML}{2A00FF}
+
+\definecolor{background}{HTML}{F2F7FF}
+
+\lstset{%
+  basicstyle=\linespread{0.8}\scriptsize\ttfamily, % code to be displayed as monospace
+  breaklines=true,
+  %frame=b
+  commentstyle=\color{javacommentscolor},
+  keywordstyle=\color{javakeywordscolor},
+  stringstyle=\color{javastringscolor},
+  showstringspaces=false,  % do not show string spaces character
+  tabsize=4,  % change tabs to spaces
+  keywordsprefix={@},  % capture method annotations and doctools
+  %showtabs=true,
+  %tab=|,
+  xleftmargin=1cm
+}
+
+% TODO: Modify listings in the next lab so that I don't have to wrap in figure
+%       env anymore -- makes the following lines irrelevant
+\renewcommand{\lstlistingname}{Figure}
+
+\newcommand{\centeredimage}[2]{%
+  \begin{center}
+    \includegraphics[scale=#1]{#2}
+  \end{center}
+}
+
+%% Make a multi-page code figure (only way I've figured out how to do this conveniently as of yet).
+% Label, caption, and code path
+\newcommand{\iftcodefigure}[3]{%
+  \begin{codefigure}
+    \label{#1}
+    \addtocounter{figure}{-1}
+    \lstinputlisting[language=java, 
+                     backgroundcolor=\color{background},
+                     framexleftmargin=10pt,
+                     framextopmargin=6pt,
+                     framexbottommargin=6pt,
+                     frame=tb,
+                     framerule=0pt, 
+                     caption={#2}, captionpos=b]{#3}
+  \end{codefigure}
+}
+
+\makeatletter
+% Top-align float-only pages
+% https://tex.stackexchange.com/a/28565/96382
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+
+% Set up the table of contents so that titles are displayed
+\renewcommand*\contentsname{Summary}
+\setcounter{secnumdepth}{0}
+
+% Share Figure and listings counter
+\AtBeginDocument{%
+  \let\c@figure\c@lstlisting
+  \let\thefigure\thelstlisting
+  \let\ftype@lstlisting\ftype@figure
+}
+\makeatother
+
+\title{\vspace{6ex}Interfaces and lambda expressions\\
+  \Large IFT 194: HW 4}
+\author{Brandon Doyle\\
+\href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
+1215232174\\[1em]
+Dr. Usha Jagannathan\\
+\href{mailto:Usha.Jagannathan@asu.edu}{Usha.Jagannathan\at{}asu.edu}}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+\tableofcontents
+\blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
+\newpage
+\section{7.1}
+We're asked to write a method that accepts two integer parameters and returns their average as a floating-point value. See \hyperref[fig:one]{Figure 1} for my solution below.
+\iftcodefigure{fig:one}{Average2.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_4/Average2.java}
+\section{7.2}
+See again \hyperref[fig:one]{Figure 1} for my solution to finding the average of three integers. It is of course simple to extend the solution to an arbitrary number of arguments by writing a variadic method.
+\section{7.10}
+When a 
+\section{7.11}
+\section{7.12}
+\section{7.13}
+\section{7.14}
+\section{7.15}
+\end{document}
