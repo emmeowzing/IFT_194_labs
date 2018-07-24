@@ -16,6 +16,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{tikz-uml}
 \usepackage{caption}
 
 \captionsetup{%
@@ -59,6 +60,8 @@
 \definecolor{javacommentscolor}{HTML}{646464}
 \definecolor{javakeywordscolor}{HTML}{7F0055}
 \definecolor{javastringscolor}{HTML}{2A00FF}
+
+\definecolor{background}{HTML}{F2F7FF}
 
 \lstset{%
   basicstyle=\linespread{0.8}\scriptsize\ttfamily, % code to be displayed as monospace
@@ -120,7 +123,7 @@
 }
 \makeatother
 
-\title{\vspace{6ex}OO Design and Interfaces in Java\\
+\title{\vspace{6ex}Interfaces and lambda expressions\\
   \Large IFT 194: Lab 4}
 \author{Brandon Doyle\\
 \href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
@@ -137,11 +140,43 @@ Dr. Usha Jagannathan\\
 \thispagestyle{empty}
 \end{titlepage}
 \tableofcontents
-\newpage
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
+\newpage
 \section{Changing People}
+In this section we're asked to draw a trace of the program in \texttt{ChangingPeople.java}, which instantiates and modifies instances of \texttt{Person}. I've included both of these clases in \hyperref[fig:one]{Figure 1} and \hyperref[fig:two]{Figure 2}.
+\begin{verbbox}[\mbox{}\scriptsize]
+person1 -> Person("Sally", 13)
+person2 -> Person("Sam", 15)
+age := 21
+name -> String("Jill")
+\end{verbbox}
+\begin{figure}[h!]
+  \centering
+  \theverbbox
+  \caption{Trace of \texttt{ChangingPeople.java}.}
+\end{figure}
+%I've drawn the UML diagram below with \href{http://perso.ensta-paristech.fr/~kielbasi/tikzuml/var/files/html/web-tikz-uml-userguide.html}{TikZ-UML}.
+%\begin{figure}[h!]
+%  \centering
+%  \begin{tikzpicture}
+%    \umlclass{Person}{%
+%
+%    }{%
+%        
+%    }
+%  \end{tikzpicture}
+%  \label{fig:three}
+%  \caption{UML Diagram for \texttt{ChangingPeople.java}}
+%\end{figure}
+\iftcodefigure{fig:one}{Person.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_4/Person.java}
+% Figure 2
+\iftcodefigure{fig:two}{ChangingPeople.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_4/ChangingPeople.java}
 \section{Using the \texttt{Comparable} Interface}
 \section{A Flexible Account Class}
 \section{Opening and Closing Accounts}
 \section{Transferring Funds}
+\newpage
+% Figure 1
 \end{document}

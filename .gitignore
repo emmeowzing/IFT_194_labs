@@ -1,3 +1,6 @@
+## Ignore package sty
+tikz-uml.sty
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
