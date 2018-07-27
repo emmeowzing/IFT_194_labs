@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{tikz-uml}
 \usepackage{hyperref}
 \hypersetup{%
   colorlinks=true,
@@ -63,6 +64,7 @@
 \definecolor{background}{HTML}{F2F7FF}
 
 \lstset{%
+  morekeywords={var},
   basicstyle=\linespread{0.8}\scriptsize\ttfamily, % code to be displayed as monospace
   breaklines=true,
   %frame=b
@@ -74,7 +76,7 @@
   keywordsprefix={@},  % capture method annotations and doctools
   %showtabs=true,
   %tab=|,
-  xleftmargin=1cm
+  xleftmargin=1cm,
 }
 
 % TODO: Modify listings in the next lab so that I don't have to wrap in figure
@@ -94,6 +96,7 @@
     \label{#1}
     \addtocounter{figure}{-1}
     \lstinputlisting[language=java, 
+                     morekeywords={var},
                      backgroundcolor=\color{background},
                      framexleftmargin=10pt,
                      framextopmargin=6pt,
@@ -122,7 +125,7 @@
 }
 \makeatother
 
-\title{\vspace{6ex}Interfaces and lambda expressions\\
+\title{\vspace{6ex}OOP Design and Interfaces\\
   \Large IFT 194: HW 4}
 \author{Brandon Doyle\\
 \href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
@@ -148,10 +151,39 @@ We're asked to write a method that accepts two integer parameters and returns th
 \section{7.2}
 See again \hyperref[fig:one]{Figure 1} for my solution to finding the average of three integers. It is of course simple to extend the solution to an arbitrary number of arguments by writing a variadic method.
 \section{7.10}
-When a 
+In Java, variables are pass-by-value. We just need to keep in mind whether the variable we're working with represents a reference to an object or contains a primitive value. Both references to objects and primitive values are \textit{copied} to a method's scope. See also \hyperref[fig:two]{Figure 2} for a demonstration.
+
+For example, the \texttt{void}-return \texttt{addOne(int[] arr)} and \texttt{addOne(ArrayList<Integer> arr)} methods have the ability to update entries of their input because the methods' argument variables reference the same objects as those in \texttt{main} that were used to call the method.
+
+On the other hand, calling \texttt{primAddOne} does not modify the value of \texttt{x} in the \texttt{main} method because we're effectively passing a \textit{copy} of the primitive value to the method.
+\iftcodefigure{fig:two}{ArgumentDifferences.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_4/ArgumentDifferences.java}
 \section{7.11}
+A static method is essentially instance-independent. In other words, the method's scope is practically anything that is not associated with an instance of its parent class. Therefore, in extension, these methods do not have access to data contained within particular instances of a class.
 \section{7.12}
+Yes, you can implement two interfaces with the same method signature. For example, consider \hyperref[fig:three]{Figure 3}, in which I've written a conglomeration of interfaces and a class that implements them. I did, however, discover a conflict while implementing interfaces with default method declarations, which is why the \texttt{Example3} interface indeed \texttt{extends} the others. This ensures the method declarations are overridden.
+\iftcodefigure{fig:three}{Implementer.java. This example also demonstrates how the \texttt{main} method, which is a \texttt{static} method, is indeed not paired with any particular instance of \texttt{Implementer}; instead, we must create an instance to act upon.}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_4/Implementer.java}
 \section{7.13}
+\label{sec:seventhirteen}
+In this section we're tasked with writing an interface \texttt{Visible} with two methods. Please see my solution in \hyperref[fig:four]{Figure 4}.
+\iftcodefigure{fig:four}{ImplementVisibile.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_4/ImplementVisible.java}
+There may of course be more complex (or colorful) solutions to this implementation, but I chose a pretty straightforward one. The requirement is simply to write definitions for all (non-default) methods provided in the \texttt{interface} definition.
 \section{7.14}
+Here we're tasked with drawing a UML (Unified Modeling Language) diagram of the code in \hyperref[sec:seventhirteen]{Section 7.13}. See \hyperref[fig:five]{Figure 5} for my solution.
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}
+    \umlclass[x=0, y=0]{ImplementVisible}{-\_visibility: boolean}{\umlstatic{main(args: String): void}\\+makeVisible(): boolean\\+makeInvisible(): boolean}
+    \umlclass[x=6, y=0, type=interface]{Visible}{}{makeVisible(): boolean\\makeInvisible(): boolean}
+    \umlimpl{ImplementVisible}{Visible}
+  \end{tikzpicture}
+  \label{fig:five}
+  \caption{UML diagram of the code presented in \hyperref[fig:four]{Figure 4}.}
+\end{figure}
 \section{7.15}
+We're asked to write an interface with method declarations that should indicate whether an instance that implements it is broken. See \hyperref[fig:six]{Figure 6} for my solution.
+\iftcodefigure{fig:six}{Something.java}{%
+  /home/brandon/eclipse-workspace/ift_194_hw/src/hw_4/Something.java}
 \end{document}
