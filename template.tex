@@ -74,7 +74,8 @@
   keywordsprefix={@},  % capture method annotations and doctools
   %showtabs=true,
   %tab=|,
-  xleftmargin=1cm
+  xleftmargin=1cm,
+  morekeywords={var}
 }
 
 % TODO: Modify listings in the next lab so that I don't have to wrap in figure
@@ -93,7 +94,8 @@
   \begin{codefigure}
     \label{#1}
     \addtocounter{figure}{-1}
-    \lstinputlisting[language=java, 
+    \lstinputlisting[language=java,
+                     morekeywords={var},
                      backgroundcolor=\color{background},
                      framexleftmargin=10pt,
                      framextopmargin=6pt,
