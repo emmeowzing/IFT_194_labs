@@ -175,8 +175,8 @@ Here we're tasked with drawing a UML (Unified Modeling Language) diagram of the 
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}
-    \umlclass[x=0, y=0]{ImplementVisible}{-\_visibility: boolean}{\umlstatic{main(args: String): void}\\+makeVisible(): boolean\\+makeInvisible(): boolean}
-    \umlclass[x=6, y=0, type=interface]{Visible}{}{makeVisible(): boolean\\makeInvisible(): boolean}
+    \umlclass[x=0, y=0]{ImplementVisible}{-\_visibility: boolean}{\umlstatic{+main(args: String): void}\\+makeVisible(): boolean\\+makeInvisible(): boolean}
+    \umlclass[x=6, y=0, type=interface]{Visible}{}{+makeVisible(): boolean\\+makeInvisible(): boolean}
     \umlimpl{ImplementVisible}{Visible}
   \end{tikzpicture}
   \label{fig:five}
