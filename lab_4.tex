@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{tikz-uml}
 \usepackage{hyperref}
 \hypersetup{%
   colorlinks=true,
@@ -38,7 +39,9 @@
   breakable, 
   frame hidden, 
   colback=white,
-  #1
+  #1,
+  bottom=-2em   % Modified for this specific Lab to fit figures on the same
+                % page.
 }
 
 % Better `@' symbol
@@ -75,7 +78,8 @@
   keywordsprefix={@},  % capture method annotations and doctools
   %showtabs=true,
   %tab=|,
-  xleftmargin=1cm
+  xleftmargin=1cm,
+  morekeywords={var}
 }
 
 % TODO: Modify listings in the next lab so that I don't have to wrap in figure
@@ -95,6 +99,7 @@
     \label{#1}
     \addtocounter{figure}{-1}
     \lstinputlisting[language=java, 
+                     morekeywords={var},
                      backgroundcolor=\color{background},
                      framexleftmargin=10pt,
                      framextopmargin=6pt,
@@ -123,7 +128,7 @@
 }
 \makeatother
 
-\title{\vspace{6ex}Interfaces and lambda expressions\\
+\title{\vspace{6ex}OOP Design and Interfaces\\
   \Large IFT 194: Lab 4}
 \author{Brandon Doyle\\
 \href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
@@ -143,40 +148,75 @@ Dr. Usha Jagannathan\\
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \newpage
 \section{Changing People}
-In this section we're asked to draw a trace of the program in \texttt{ChangingPeople.java}, which instantiates and modifies instances of \texttt{Person}. I've included both of these clases in \hyperref[fig:one]{Figure 1} and \hyperref[fig:two]{Figure 2}.
+In this section we're asked to draw a trace of the program in \texttt{ChangingPeople.java}, which instantiates and modifies instances of \texttt{Person}. I've included both of these classes in \hyperref[fig:one]{Figure 2} and \hyperref[fig:two]{Figure 3}. You'll find the updated code in the zipped file with this assignment (satisfying 3.)
 \begin{verbbox}[\mbox{}\scriptsize]
 person1 -> Person("Sally", 13)
 person2 -> Person("Sam", 15)
 age := 21
-name -> String("Jill")
+name -> "Jill"
+
+               |  (Method call)
+               V
+
+{ person1, p1 } -> Person("Sally", 13)
+{ person2, p2 } -> Person("Sam", 15)
+age := 21
+{ name, name' } -> "Jill"
+age' := 21
+
+               |  Changes to p2
+               V
+
+{ person1, p1 } -> Person("Sally", 13)
+person2 -> Person("Sam", 15)
+age := 21
+{ name, name' } -> "Jill"
+age' := 21
+{ p3, p2 } -> Person(name', 21)  ###
+
+               |  Changes to p1
+               V
+
+{ person1, p1 } -> Person(name', 55)
+person2 -> Person("Sam", 15)
+age := 21
+name -> "Jill"
+name' -> "Jack"
+age' := 55
+{ p3, p2 } -> Person(name, 21)
+
+               |  Return to main method
+               V
+
+person1 -> Person("Jack", 55)
+person2 -> Person("Sam", 15)
+age := 21
+name -> "Jill"
 \end{verbbox}
 \begin{figure}[h!]
   \centering
   \theverbbox
-  \caption{Trace of \texttt{ChangingPeople.java}.}
+  \caption{Trace of \texttt{ChangingPeople.java}. Regarding the line delimited by \texttt{\#\#\#}, I'm assuming that, because this type of String instantiation is implicitly interned, it's the same instance as that referred to by name. The primitive value \texttt{21} is copied into the new object. Moreover, as a note on notation: identifiers that lie in braces are references to the same object.}
 \end{figure}
-%I've drawn the UML diagram below with \href{http://perso.ensta-paristech.fr/~kielbasi/tikzuml/var/files/html/web-tikz-uml-userguide.html}{TikZ-UML}.
-%\begin{figure}[h!]
-%  \centering
-%  \begin{tikzpicture}
-%    \umlclass{Person}{%
-%
-%    }{%
-%        
-%    }
-%  \end{tikzpicture}
-%  \label{fig:three}
-%  \caption{UML Diagram for \texttt{ChangingPeople.java}}
-%\end{figure}
-\iftcodefigure{fig:one}{Person.java}{%
-  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_4/Person.java}
-% Figure 2
-\iftcodefigure{fig:two}{ChangingPeople.java}{%
-  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_4/ChangingPeople.java}
 \section{Using the \texttt{Comparable} Interface}
+\begin{enumerate}
+  \item In this question we're asked to write a class with a \texttt{static} method \texttt{largest} that has the ability to return the largest of three arguments, which should be a type that implements the \texttt{Comparable<>} interface. See \hyperref[fig:three]{Figure 4} and \hyperref[fig:four]{Figure 5} for my solution.
+  \item 
+\end{enumerate}
 \section{A Flexible Account Class}
 \section{Opening and Closing Accounts}
 \section{Transferring Funds}
 \newpage
-% Figure 1
+% Figure 2
+\iftcodefigure{fig:one}{Person.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_4/Person.java}
+% Figure 3
+\iftcodefigure{fig:two}{ChangingPeople.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_4/ChangingPeople.java}
+% Figure 4
+\iftcodefigure{fig:three}{Compare3.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_4/Compare3.java}
+% Figure 5
+\iftcodefigure{fig:four}{Comparisons.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_4/Comparisons.java}
 \end{document}
