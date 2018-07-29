@@ -1,0 +1,212 @@
+\documentclass[leqno, 11pt]{article}
+
+\usepackage{lmodern}
+\usepackage[scaled]{beramono}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{tikz-uml}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=magenta,
+  filecolor=magenta,
+  urlcolor=magenta
+}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{caption}
+
+\captionsetup{%
+  width=1.0\linewidth,
+  justification=centering
+}
+
+\usepackage{enumitem} % allow characters instead of numbers
+\usepackage{verbatimbox}  % center \verbatim env in figure env
+\usepackage{siunitx}  % SI unit formatting
+\usepackage{colortbl}  % color tabular rows/columns
+\usepackage[most]{tcolorbox}
+
+% TODO: Set up captions with tcolorbox so the user doesn't have to explicitly
+%       pass a caption={} to each \lstlisting command.
+\newtcolorbox[blend into=figures]{codefigure}[1][]{%
+  enhanced jigsaw, 
+  float=!ht, 
+  breakable, 
+  frame hidden, 
+  colback=white,
+  #1
+}
+
+% Better `@' symbol
+\newcommand{\at}{\mbox{}{\fontfamily{ptm}\selectfont @}\mbox{}}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+    \renewcommand\thefootnote{}\footnote{#1}
+    \addtocounter{footnote}{-1}
+  \endgroup
+}
+
+%\graphicspath{"/home/brandon/Desktop/IFT_194/labs/photos"}
+
+\usepackage{xcolor}
+
+\definecolor{tableheaderrow}{HTML}{CED3DB}
+
+\definecolor{javacommentscolor}{HTML}{646464}
+\definecolor{javakeywordscolor}{HTML}{7F0055}
+\definecolor{javastringscolor}{HTML}{2A00FF}
+
+\definecolor{background}{HTML}{F2F7FF}
+
+\lstset{%
+  basicstyle=\linespread{0.8}\scriptsize\ttfamily, % code to be displayed as monospace
+  breaklines=true,
+  %frame=b
+  commentstyle=\color{javacommentscolor},
+  keywordstyle=\color{javakeywordscolor},
+  stringstyle=\color{javastringscolor},
+  showstringspaces=false,  % do not show string spaces character
+  tabsize=4,  % change tabs to spaces
+  keywordsprefix={@},  % capture method annotations and doctools
+  %showtabs=true,
+  %tab=|,
+  xleftmargin=1cm,
+  morekeywords={var}
+}
+
+% TODO: Modify listings in the next lab so that I don't have to wrap in figure
+%       env anymore -- makes the following lines irrelevant
+\renewcommand{\lstlistingname}{Figure}
+
+\newcommand{\centeredimage}[2]{%
+  \begin{center}
+    \includegraphics[scale=#1]{#2}
+  \end{center}
+}
+
+%% Make a multi-page code figure (only way I've figured out how to do this conveniently as of yet).
+% Label, caption, and code path
+\newcommand{\iftcodefigure}[3]{%
+  \begin{codefigure}
+    \label{#1}
+    \addtocounter{figure}{-1}
+    \lstinputlisting[language=java,
+                     morekeywords={var},
+                     backgroundcolor=\color{background},
+                     framexleftmargin=10pt,
+                     framextopmargin=6pt,
+                     framexbottommargin=6pt,
+                     frame=tb,
+                     framerule=0pt, 
+                     caption={#2}, captionpos=b]{#3}
+  \end{codefigure}
+}
+
+\makeatletter
+% Top-align float-only pages
+% https://tex.stackexchange.com/a/28565/96382
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+
+% Set up the table of contents so that titles are displayed
+\renewcommand*\contentsname{Summary}
+\setcounter{secnumdepth}{0}
+
+% Share Figure and listings counter
+\AtBeginDocument{%
+  \let\c@figure\c@lstlisting
+  \let\thefigure\thelstlisting
+  \let\ftype@lstlisting\ftype@figure
+}
+\makeatother
+
+\title{\vspace{6ex}Inheritance and Polymorphism in Java\\
+  \Large IFT 194: Lab 5}
+\author{Brandon Doyle\\
+\href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
+1215232174\\[1em]
+Dr. Usha Jagannathan\\
+\href{mailto:Usha.Jagannathan@asu.edu}{Usha.Jagannathan\at{}asu.edu}}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\begin{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+\tableofcontents
+\blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
+\newpage
+\section{Overriding the \textit{equals} method}
+In this question we're asked to write a class \texttt{Player} that holds information about an athlete. The class must have an \texttt{equals}-method that compares two instances of \texttt{Player}. Please see \hyperref[fig:one]{Figure 2} for my solution. The following is an example session.
+\begin{verbbox}[\mbox{}\scriptsize]
+Please enter a player name: Brandon
+Please enter a team name: ASU
+Please enter a jersey number: 55
+
+Please enter a player name: Jasmine
+Please enter a team name: ASU
+Please enter a jersey number: 27
+
+Name:      Brandon
+Team Name: ASU
+Jersey:    55
+
+Name:      Jasmine
+Team Name: ASU
+Jersey:    27
+
+Brandon == Jasmine: false
+\end{verbbox}
+\begin{figure}[h!]
+  \centering
+  \theverbbox
+  \caption{Example output from \texttt{Player.java} in \hyperref[fig:one]{Figure 2}.}
+  \label{fig:three}
+\end{figure}
+\iftcodefigure{fig:one}{Player.java}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_5/Player.java}\\
+Although this code seemingly works well, in practice I believe duplication may be prevented using metaclasses, much in the same way metaclasses may be used to create singletons.
+
+This part of the lab is straightforward since we've already previously considered the difference between, for example, \texttt{"example1" == "example2"} and \texttt{"example1".equals("example2")}.
+
+Also, I would again like to highlight the rather useful differences between creating \texttt{String} objects in Java with \texttt{new String("ex")} as opposed to the more brief \texttt{"ex"} (i.e., not encapsulating the instantation with an explicit call to \texttt{String}): the former always creates a new instance, whereas the latter makes an implicit call to \textit{intern} the sequence. In other words, if memory or space isn't so much of an issue, yet performance is, I might use the former instantiation over the latter to prevent interning, and vice-versa.
+\section{Another type of employee}
+In this question we're tasked with extending the class hierarchy included in \texttt{Staff.java} in \hyperref[fig:two]{Figure 4}. (I condensed the classes to a single file so I could see the hierarchy/outline.) See \hyperref[fig:four]{Figure 3} for an example.
+\begin{verbbox}[\mbox{}\scriptsize]
+Name:    Clint
+Address: 1 Lomb Mem. Dr.
+Phone:   585-5903
+Current hours: 14
+Total Sales: 456.62
+$2,914.02
+
+Name:    Marylin
+Address: Mars
+Phone:   inf
+Current hours: 40
+Total Sales: 950.0
+$5,332.40
+\end{verbbox}
+\begin{figure}[h!]
+  \centering
+  \theverbbox
+  \caption{Example output from \texttt{Staff.java} in \hyperref[fig:two]{Figure 4}.}
+  \label{fig:four}
+\end{figure}
+\iftcodefigure{fig:two}{Staff.java.}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_5/Staff.java}
+\section{Conclusion}
+It took about 4 hours to complete this lab. One thing I learned more about is  \texttt{abstract} classes. I've known of this feature in Python (cf. \href{https://docs.python.org/3/library/abc.html}{abc}), but I've never used the same concept in Java before. For example, see \hyperref[fig:five]{Figure 5} for a rewrite of \texttt{StaffMember} in Python.
+
+I didn't really come across any issues with these concepts, i.e. inheritance and polymorphism, but that's probably because I've seen them in a few different languages.
+\iftcodefigure{fig:five}{staff.py.}{%
+  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_5/staff.py}
+\end{document}
