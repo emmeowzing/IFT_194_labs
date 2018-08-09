@@ -173,6 +173,33 @@ Exception in thread "main" java.lang.NumberFormatException: For input string: ""
 \begin{center}
   \theverbbox
 \end{center}
-
+One way to fix this error is to encapsulate the loop in a \texttt{try} block, as in \hyperref[fig:three]{Figure 3}.
+\iftcodefigure{fig:three}{ParseIntsBetter.java}{%
+  /mnt/c/Users/bdoyle/eclipse-workspace/ift_labs/src/lab_6/ParseIntsBetter.java}\\
 \section{Throwing Exceptions}
+In this section we're given the two classes in \hyperref[fig:four]{Figure 4}, which I've rewritten to compute factorials of input integers \textit{safely}. Below is an example session with the program.
+\begin{verbbox}[\mbox{}\scriptsize]
+Enter an integer: hello!
+*** Error: please enter an integer
+Enter an integer: 15
+15! = 2004310016
+Compute another factorial? [y|n]: y
+Enter an integer: 13
+13! = 1932053504
+Compute another factorial? [y|n]: n
+Exiting.
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+\section{Conclusion}
+This has been a great experience!
+
+I spent approximately 3 hours cumulatively writing this lab. I learned about writing and throwing exceptions in my own methods. I also think it would be very interested writing our own exceptions to be thrown in our packages. 
+
+I also think that it would be useful learning more about text processing, so that we don't have to throw exceptions every time some data doesn't look as it's supposed to.
+
+A feature of pure functional languages like Haskell that I really admire is \textit{totality}. The most important part of \href{https://en.wikipedia.org/wiki/Total_functional_programming}{totality} is, in my opinion, the fact that functions are guaranteed to have an output for every input. In reality/practice this can be extremely difficult to guarantee; for instance, even while computing something as fundamental as a continuous factorial (cf. the \href{https://en.wikipedia.org/wiki/Gamma_function}{gamma function}), we can run into a plethora of issues.
+\iftcodefigure{fig:four}{Factorials.java}{%
+  /mnt/c/Users/bdoyle/eclipse-workspace/ift_labs/src/lab_6/Factorials.java}
 \end{document}
