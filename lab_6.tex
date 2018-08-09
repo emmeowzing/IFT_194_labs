@@ -125,8 +125,8 @@
 }
 \makeatother
 
-\title{\vspace{6ex}The Java Programming Structure\\
-  \Large IFT 194: HW 1}
+\title{\vspace{6ex}Exception Handling in Java\\
+  \Large IFT 194: Lab 6}
 \author{Brandon Doyle\\
 \href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
 1215232174\\[1em]
@@ -145,9 +145,34 @@ Dr. Usha Jagannathan\\
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \newpage
 \section{Exceptions aren't always errors}
-For this section we're given a class \texttt{CountLetters} (cf. \hyperref[fig:one]{Figure 1}) that reads a word from the user and prints the number of occurrences of each letter in the word.
+For this section we're given a class \texttt{CountLetters} (cf. \hyperref[fig:one]{Figure 1}) that reads a word from the user and prints the number of occurrences of each letter in the word. However, we're of course not guaranteed to \textit{only} get letters, so it will throw an error if we provide any other input. 
 \iftcodefigure{fig:one}{CountLetters.java}{%
-  /home/brandon/eclipse-workspace/ift_194_labs/src/lab_6/CountLetters.java}
+  /mnt/c/Users/bdoyle/eclipse-workspace/ift_labs/src/lab_6/CountLetters.java}\\
+You may also uncomment the loop containing the call to \texttt{scnr.nextLine}, which uses a regular expression to ensure the input contains only a certain set of characters.
 \section{Placing Exception Handlers}
+In this section we're given a class \texttt{ParseInts} in \hyperref[fig:two]{Figure 2} for parsing a line of text containing integers (hopefully).
+\iftcodefigure{fig:two}{ParseInts.java}{%
+  /mnt/c/Users/bdoyle/eclipse-workspace/ift_labs/src/lab_6/ParseInts.java}\\
+However, as it stands this program is extremely frail. For example, if I input a string ``\texttt{20 56}'', we receive the following output.
+\begin{verbbox}[\mbox{}\scriptsize]
+Enter a line of text: 20 56
+The sum of the integers on this line is: 76
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+On the other hand, adding a single space to the beginning of the input, let alone a character that is not a number, produces a disastrous result.
+\begin{verbbox}[\mbox{}\scriptsize]
+Enter a line of text:  55 66
+Exception in thread "main" java.lang.NumberFormatException: For input string: ""
+  at java.base/java.lang.NumberFormatException.forInputString(Unknown Source)
+  at java.base/java.lang.Integer.parseInt(Unknown Source)
+  at java.base/java.lang.Integer.parseInt(Unknown Source)
+  at ift_labs/lab_6.ParseInts.main(ParseInts.java:18)
+\end{verbbox}
+\begin{center}
+  \theverbbox
+\end{center}
+
 \section{Throwing Exceptions}
 \end{document}
