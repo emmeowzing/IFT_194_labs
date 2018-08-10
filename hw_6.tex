@@ -19,6 +19,9 @@
 \usepackage{graphicx}
 \usepackage{caption}
 
+%% Because I'm on my 8th cup of coffee today :D:P
+\usepackage{coffee4}
+
 \captionsetup{%
   width=1.0\linewidth,
   justification=centering
@@ -125,8 +128,8 @@
 }
 \makeatother
 
-\title{\vspace{6ex}The Java Programming Structure\\
-  \Large IFT 194: HW 1}
+\title{\vspace{6ex}Exception Handling in Java\\
+  \Large IFT 194: HW 6}
 \author{Brandon Doyle\\
 \href{mailto:bdoyle@asu.edu}{bdoyle5\at{}asu.edu}\\
 1215232174\\[1em]
@@ -139,10 +142,22 @@ Dr. Usha Jagannathan\\
 \begin{document}
 \begin{titlepage}
 \clearpage\maketitle
+%% I accidentally set my coffee on the paper ¯\_(^^)_/¯
+\cofeAm{0.4}{0.8}{15}{-200}{-50}
+\cofeCm{0.3}{0.8}{15}{-100}{-50}
+%\cofeAm{0.2}{0.8}{45}{-180}{-220}
 \thispagestyle{empty}
 \end{titlepage}
 \tableofcontents
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \newpage
-Content
+\section{Ex. 11.2}
+For this question we're tasked with creating a UML class diagram of the \texttt{ProductCodes} program in \hyperref[fig:one]{Figure 1}.
+\section{Ex. 11.3}
+\section{Ex. 11.4}
+\section{PP. 11.1}
+\section{PP. 11.2}
+\newpage
+\iftcodefigure{fig:one}{ProductCodes.java}{%
+  }
 \end{document}
