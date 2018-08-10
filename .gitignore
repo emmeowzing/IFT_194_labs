@@ -16,6 +16,9 @@ coffee4.sty
 *.cb2
 .*.lb
 
+## Vim auxiliary files:
+*.swp
+
 ## Intermediate documents:
 *.dvi
 *.xdv
