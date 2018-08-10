@@ -1,5 +1,6 @@
 ## Ignore package sty
 tikz-uml.sty
+coffee4.sty
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
