@@ -152,12 +152,22 @@ Dr. Usha Jagannathan\\
 \blfootnote{View the source of this document on \href{https://github.com/bjd2385/IFT_194_labs/blob/master/\jobname.tex}{GitHub}.}
 \newpage
 \section{Ex. 11.2}
-For this question we're tasked with creating a UML class diagram of the \texttt{ProductCodes} program in \hyperref[fig:one]{Figure 1}.
+For this question we're tasked with creating a UML class diagram of the \texttt{ProductCodes} program I've recreated in \hyperref[fig:one]{Figure 1}. See below for my solution.
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \umlclass[x=0, y=0]{ProductCodes}{}{\umlstatic{+main(args: String): void}\\+main(): void}
+    \umlclass[x=6, y=0, type=interface]{Visible}{}{+makeVisible(): boolean\\+makeInvisible(): boolean}
+    \umlimpl{ImplementVisible}{Visible}
+  \end{tikzpicture}
+  \label{fig:two}
+  \caption{UML diagram of the code presented in \hyperref[fig:one]{Figure 2}.}
+\end{figure}
 \section{Ex. 11.3}
 \section{Ex. 11.4}
 \section{PP. 11.1}
 \section{PP. 11.2}
 \newpage
 \iftcodefigure{fig:one}{ProductCodes.java}{%
-  }
+  /mnt/c/Users/bdoyle/eclipse-workspace/ift_hw/src/ift_hw/ProductCodes.java}
 \end{document}
